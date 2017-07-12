@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:title="第一章"
+            android:id="@+id/chapter_one"/>
+        <item android:title="第二章"
+            android:id="@+id/chapter_two"/>
+        <item android:title="第三章"
+            android:id="@+id/chapter_three"/>
+        <item android:title="第四章"
+            android:id="@+id/chapter_four"/>
+        <item android:title="第五章"
+            android:id="@+id/chapter_five"/>
+        <item android:title="第六章"
+            android:id="@+id/chapter_six"/>
+        <item android:title="第七章"
+            android:id="@+id/chapter_seven"/>
+    </group>
+</menu>

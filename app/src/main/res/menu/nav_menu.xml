@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/index"
+            android:title="目录" />
+        <item
+            android:id="@+id/training"
+            android:title="数据库练习" />
+        <item
+            android:id="@+id/contactus"
+            android:title="联系我们" />
+        <item
+            android:id="@+id/marking"
+            android:title="评价此应用" />
+    </group>
+</menu>
