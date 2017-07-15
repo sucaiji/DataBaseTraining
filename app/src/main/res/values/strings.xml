@@ -1,11 +1,32 @@
 <resources>
-    <string name="app_name">随时随地学数据库</string>
+    <string name="app_name">随身数据库学习</string>
     <string name="introduction_title">前言</string>
     <string name="introduction"> \n\t\t这是一个帮助你学习数据库相关知识的app，我搜罗了网上的一些相关教程，以及一些官方说明，并把他们整理在了一起，按章节划分。\n
     \t\t你可以在闲暇的时候掏出手机来，进行数据库的学习。并且，通过本应用，可以操作安卓系统内置的sqlite数据库，虽然这是一个轻量的数据库，但是使用它来练习增删改查等一些基本操作也是足够了。\n
         \t\t大多数转载的内容都写上了出处，有少部分文章经过多次转载，已经没法查明出处，如果你是这些文章的作者，请联系我，我会删除这些内容。\n
-            \t\t我深知一个app中不断弹出广告是一件多么讨人厌的事，所以我尽量把广告放在了不那么妨碍阅读的地方，如果你觉得这个应用非常不错，又无法忍受广告的话，请耐心学习下去，我在教程的某个角落隐藏了无广告版应用的下载地址。
-        \n\n\n\n\n\n\n\n\n\n\n\n\nbalbasjflkahsfklhaf
+            \t\t我知道一个app中不断弹出广告是一件多么讨人厌的事，所以我尽量把广告放在了不那么妨碍阅读的地方，如果你觉得这个应用非常不错，又无法忍受广告的话，请耐心学习下去，我在教程的某个角落隐藏了无广告版应用的下载地址。
+        \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nba
+        balbasjflkahsfklhafbalbasjflkahsfklhafbalbasjflkahsfklhafbalbasjflkahsfklhafbalbasjflkahsfklhafbalbasjflkahsfklhaf
+        lbasjflkbalbasjflkahsfklhafbalbasjflkahsfklhafbalbasjflkahsfklhafbalbasjflkahsfklhafbalbasjflkahsfklhafbalbasjflkahsfklhafahsfklhaf
     </string>
+    <string name="index">目录</string>
+    <string name="start_study">开始学习</string>
+    <string name="database_training">数据库练习</string>
+    <string name="aboutus">联系我们</string>
+    <string name="marking">评价此应用</string>
     <string name="title_activity_index">目录</string>
+    <string name="chapter_zero">序章</string>
+    <string name="chapter_one">第一章</string>
+    <string name="chapter_two">第二章</string>
+    <string name="chapter_three">第三章</string>
+    <string name="chapter_four">第四章</string>
+    <string name="chapter_five">第五章</string>
+    <string name="chapter_six">第六章</string>
+    <string name="chapter_seven">第七章</string>
+    <string name="chapter_eight">第八章</string>
+    <string name="chapter_nine">第九章</string>
+    <string name="chapter_ten">第十章</string>
+    <string name="chapter_eleven">第十一章</string>
+    <string name="chapter_twelve">第十二章</string>
+
 </resources>

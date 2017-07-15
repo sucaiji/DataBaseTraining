@@ -1,18 +1,24 @@
 package com.example.sufchick.databasetraining;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+
 
 /**
  * Created by sufchick on 2017/7/11.
  */
 
 public class BaseActivity extends AppCompatActivity{
+
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
+
     }
+
+
 }

@@ -17,25 +17,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/Base.Theme.AppCompat.Light"
-            ></android.support.v7.widget.Toolbar>
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/app_name"
+                android:textColor="#FFFFFF"
+                android:textSize="25dp" />
+
+        </android.support.v7.widget.Toolbar>
 
         <TextView
-            android:text="@string/introduction_title"
-            android:textSize="60px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            />
+            android:text="@string/introduction_title"
+            android:textSize="60px" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:text="@string/introduction"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@string/introduction" />
 
 
         </ScrollView>
