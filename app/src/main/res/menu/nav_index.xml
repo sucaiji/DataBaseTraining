@@ -1,45 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="none">
+    <group android:checkableBehavior="all">
         <item
             android:id="@+id/chapter_zero"
             android:title="@string/chapter_zero" />
         <item
-            android:id="@+id/chapter_one"
-            android:title="@string/chapter_one" />
+            android:id="@+id/chapter_one_1"
+            android:title="@string/chapter_one_1" />
         <item
-            android:id="@+id/chapter_two"
-            android:title="@string/chapter_two" />
+            android:id="@+id/chapter_one_2"
+            android:title="@string/chapter_one_2" />
         <item
-            android:id="@+id/chapter_three"
-            android:title="@string/chapter_three" />
-        <item
-            android:id="@+id/chapter_four"
-            android:title="@string/chapter_four" />
-        <item
-            android:id="@+id/chapter_five"
-            android:title="@string/chapter_five" />
-        <item
-            android:id="@+id/chapter_six"
-            android:title="@string/chapter_six" />
-        <item
-            android:id="@+id/chapter_seven"
-            android:title="@string/chapter_seven" />
-        <item
-            android:id="@+id/chapter_eight"
-            android:title="@string/chapter_eight" />
-        <item
-            android:id="@+id/chapter_nine"
-            android:title="@string/chapter_nine" />
-        <item
-            android:id="@+id/chapter_ten"
-            android:title="@string/chapter_ten" />
-        <item
-            android:id="@+id/chapter_eleven"
-            android:title="@string/chapter_eleven" />
-        <item
-            android:id="@+id/chapter_twelve"
-            android:title="@string/chapter_twelve" />
+            android:id="@+id/chapter_one_3"
+            android:title="@string/chapter_one_3" />
+
 
 
     </group>

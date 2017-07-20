@@ -29,8 +29,18 @@
                 android:textColor="#FFFFFF"/>
 
         </android.support.v7.widget.Toolbar>
-
-
+        <!--
+        <Button
+            android:id="@+id/training_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
+    -->
+        <TextView
+            android:text="建设中！"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

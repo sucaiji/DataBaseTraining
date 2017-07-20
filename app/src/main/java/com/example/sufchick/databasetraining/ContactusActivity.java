@@ -21,7 +21,7 @@ public class ContactusActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aboutus);
+        setContentView(R.layout.activity_contactus);
 
         mToolbar=(Toolbar)findViewById(R.id.aboutus_toolbar);
         mToolbar.setTitle("");
@@ -33,16 +33,19 @@ public class ContactusActivity extends AppCompatActivity {
         mDrawerLayout=(DrawerLayout)findViewById(R.id.aboutus_drawer_layout);
 
         mNavigationView=(NavigationView)findViewById(R.id.aboutus_nav_view);
+        mNavigationView.setCheckedItem(R.id.contactus);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 mDrawerLayout.closeDrawer(mNavigationView);
                 switch (item.getItemId()){
-                    case R.id.contactus:
-                        Intent contactusIntent=new Intent(ContactusActivity.this,ContactusActivity.class);
-                        startActivity(contactusIntent);
+                    case R.id.start_screen:
+                        Intent mainIntent=new Intent(ContactusActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(mainIntent);
                         break;
-                    case R.id.index:
+                    case R.id.contactus:
+                        break;
+                    case R.id.start_study:
                         Intent indexIntent=new Intent(ContactusActivity.this,IndexActivity.class);
                         startActivity(indexIntent);
                         break;

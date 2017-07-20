@@ -27,7 +27,8 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".ContactusActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
+        <activity android:name=".ResultActivity"></activity>
     </application>
 
 </manifest>

@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-public class TrainingActivity extends AppCompatActivity {
+public class TrainingActivity extends AppCompatActivity implements View.OnClickListener{
     private NavigationView mNavigationView;
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
+    private Button mSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,25 +32,31 @@ public class TrainingActivity extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //mSubmit=(Button)findViewById(R.id.training_submit);
+        //mSubmit.setOnClickListener(this);
+
         mDrawerLayout=(DrawerLayout)findViewById(R.id.training_drawer_layout);
 
         mNavigationView=(NavigationView)findViewById(R.id.training_nav_view);
+        mNavigationView.setCheckedItem(R.id.training);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 mDrawerLayout.closeDrawer(mNavigationView);
                 switch (item.getItemId()){
+                    case R.id.start_screen:
+                        Intent mainIntent=new Intent(TrainingActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(mainIntent);
+                        break;
                     case R.id.contactus:
                         Intent contactusIntent=new Intent(TrainingActivity.this,ContactusActivity.class);
                         startActivity(contactusIntent);
                         break;
-                    case R.id.index:
+                    case R.id.start_study:
                         Intent indexIntent=new Intent(TrainingActivity.this,IndexActivity.class);
                         startActivity(indexIntent);
                         break;
                     case R.id.training:
-                        Intent trainingIntent=new Intent(TrainingActivity.this,TrainingActivity.class);
-                        startActivity(trainingIntent);
                         break;
                     case R.id.marking:
                         Toast.makeText(TrainingActivity.this, "评价成功", Toast.LENGTH_SHORT).show();
@@ -77,5 +86,16 @@ public class TrainingActivity extends AppCompatActivity {
 
         }
         return true;
+    }
+    @Override
+    public void onClick(View v) {
+        /*switch (v.getId()){
+            case R.id.training_submit:
+                Intent submitIntent=new Intent(this,ResultActivity.class);
+                startActivity(submitIntent);
+                break;
+            default:
+                break;
+        }*/
     }
 }

@@ -1,0 +1,25 @@
+<h2>创建数据库</h2><p>这样做就可以创建一个数据库：</p>CREATE DATABASE 数据库名称<h2>创建一个表</h2><p>这样做就可以创建一个数据库中的表：</p>CREATE TABLE 表名称
+(
+列名称1 数据类型,
+列名称2 数据类型,
+.......
+)
+<h3>实例</h3><p>本例演示如何创建名为 "Person" 的表，有四个列。列名是："LastName"、"FirstName"、"Address" 以及 "Age"：</p>CREATE TABLE Person 
+(
+LastName varchar,
+FirstName varchar,
+Address varchar,
+Age int
+) 
+<p>这个例子演示如何为某些列定义长度的最大值：</p>CREATE TABLE Person 
+(
+LastName varchar(30),
+FirstName varchar,
+Address varchar,
+Age int(3)
+)
+<p>数据类型（data_type）规定了列可容纳何种数据类型。下面的表格包含了SQL中最常用的数据类型：</p><h2>创建索引</h2><p>索引被创建于已有的表中，它可使对行的定位更快速更有效。可以在表格的一个或者多个列上创建索引，每个索引都会被起个名字。用户无法看到索引，它们只能被用来加速查询。</p><p class="note"><span>注释：</span>更新一个包含索引的表需要比更新一个没有索引的表更多的时间，这是由于索引本身也需要更新。因此，理想的做法是仅仅在常常用于搜索的列上面创建索引。</p><h3>唯一的索引 (Unique Index)</h3><p>在表格上面创建某个一个唯一的索引。唯一的索引意味着两个行不能拥有相同的索引值。</p>CREATE UNIQUE INDEX 索引名称
+ON 表名称 (列名称) 
+<p>"列名称" 规定你需要索引的列。</p><h3>简单的索引</h3><p>在表上创建一个简单的索引。当我们省略关键词 UNIQUE 时，就可以使用重复的值。</p>CREATE INDEX 索引名称
+ON 表名称 (列名称)
+<p>"列名称" 规定你需要索引的列。</p><h3>实例</h3><p>本例会创建一个简单的索引，名为 "PersonIndex"，在 Person 表的 LastName 字段：</p><p>CREATE INDEX PersonIndex</p><p>ON Person (LastName)&nbsp;</p><p>如果您希望以<span>降序</span>索引某个列中的值，您可以在列名称之后添加保留字&nbsp;<span>DESC</span>：</p><p>CREATE INDEX PersonIndex</p><p>ON Person (LastName DESC)&nbsp;</p><p>假如您希望索引不止一个列，您可以在括号中列出这些列的名称，用逗号隔开：</p><p>CREATE INDEX PersonIndex</p><p>ON Person (LastName, FirstName)</p>
