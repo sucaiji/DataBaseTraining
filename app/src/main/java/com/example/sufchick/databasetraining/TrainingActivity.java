@@ -44,10 +44,6 @@ public class TrainingActivity extends AppCompatActivity implements View.OnClickL
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 mDrawerLayout.closeDrawer(mNavigationView);
                 switch (item.getItemId()){
-                    case R.id.start_screen:
-                        Intent mainIntent=new Intent(TrainingActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(mainIntent);
-                        break;
                     case R.id.contactus:
                         Intent contactusIntent=new Intent(TrainingActivity.this,ContactusActivity.class);
                         startActivity(contactusIntent);
@@ -83,7 +79,6 @@ public class TrainingActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.toolbar_menu:
                 mDrawerLayout.openDrawer(mNavigationView);
-
         }
         return true;
     }

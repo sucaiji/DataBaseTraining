@@ -39,10 +39,6 @@ public class ContactusActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 mDrawerLayout.closeDrawer(mNavigationView);
                 switch (item.getItemId()){
-                    case R.id.start_screen:
-                        Intent mainIntent=new Intent(ContactusActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(mainIntent);
-                        break;
                     case R.id.contactus:
                         break;
                     case R.id.start_study:

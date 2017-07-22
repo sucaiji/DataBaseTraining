@@ -6,7 +6,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.text.TextPaint;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -64,6 +63,8 @@ public class IndexActivity extends BaseActivity implements NavigationView.OnNavi
 
         mWebView=(WebView) findViewById(R.id.index_content_view);
 
+        changeContent("zero",R.string.chapter_zero);
+
         //content=getString(R.string.chapter_content_zero);
 
         //mTextView.setText(Html.fromHtml(content));
@@ -76,19 +77,24 @@ public class IndexActivity extends BaseActivity implements NavigationView.OnNavi
         switch(item.getItemId()){
             case R.id.chapter_zero:
                 changeContent("zero",R.string.chapter_zero);
-                //changeContent(R.string.chapter_content_zero,R.string.chapter_zero);
                 break;
             case R.id.chapter_one_1:
                 changeContent("one.1",R.string.chapter_one_1);
-                //changeContent(R.string.chapter_content_one_1,R.string.chapter_one_1);
                 break;
             case R.id.chapter_one_2:
                 changeContent("one.2",R.string.chapter_one_2);
-                //changeContent(R.string.chapter_content_one_2,R.string.chapter_one_2);
                 break;
             case R.id.chapter_one_3:
                 changeContent("one.3",R.string.chapter_one_3);
-                //changeContent(R.string.chapter_content_one_3,R.string.chapter_one_3);
+                break;
+            case R.id.chapter_one_4:
+                changeContent("one.4",R.string.chapter_one_4);
+                break;
+            case R.id.chapter_two_1:
+                changeContent("two.1",R.string.chapter_two_1);
+                break;
+            case R.id.chapter_three_1:
+                changeContent("three.1",R.string.chapter_three_1);
                 break;
 
             default:

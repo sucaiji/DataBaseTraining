@@ -41,11 +41,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         mStudyButton.setOnClickListener(this);
 
 
-        WebView webView = (WebView)findViewById(R.id.web);
-        webView.loadUrl("file:///android_asset/web/one.2.html");
-        webView.setWebViewClient(new WebViewClient());
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
 
 
         mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
@@ -55,8 +50,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 mDrawerLayout.closeDrawer(mNavigationView);
                 switch (item.getItemId()){
-                    case R.id.start_screen:
-                        break;
                     case R.id.contactus:
                         Intent contactusIntent=new Intent(MainActivity.this,ContactusActivity.class);
                         startActivity(contactusIntent);
