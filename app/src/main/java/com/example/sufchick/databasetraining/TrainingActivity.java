@@ -1,6 +1,7 @@
 package com.example.sufchick.databasetraining;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -14,7 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class TrainingActivity extends AppCompatActivity implements View.OnClickListener{
+public class TrainingActivity extends BaseActivity implements View.OnClickListener{
     private NavigationView mNavigationView;
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
@@ -55,7 +56,15 @@ public class TrainingActivity extends AppCompatActivity implements View.OnClickL
                     case R.id.training:
                         break;
                     case R.id.marking:
-                        Toast.makeText(TrainingActivity.this, "评价成功", Toast.LENGTH_SHORT).show();
+                        if(hasAnyMarketInstalled(TrainingActivity.this)){
+                            Uri uri = Uri.parse("market://details?id="+getPackageName());
+                            Intent markingIntent = new Intent(Intent.ACTION_VIEW,uri);
+                            markingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(markingIntent);
+                        }
+                        else{
+                            Toast.makeText(TrainingActivity.this, "没有找到应用市场", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     default:
                         Toast.makeText(TrainingActivity.this, "您的操作有误，请重试", Toast.LENGTH_SHORT).show();

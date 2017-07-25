@@ -1,7 +1,13 @@
 package com.example.sufchick.databasetraining;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import java.util.List;
 
 
 /**
@@ -18,6 +24,16 @@ public class BaseActivity extends AppCompatActivity{
 
 
 
+    }
+    protected boolean hasAnyMarketInstalled(Context context) {
+
+        Intent intent =new Intent();
+
+        intent.setData(Uri.parse("market://details?id=android.browser"));
+
+        List list = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+
+        return 0!= list.size();
     }
 
 

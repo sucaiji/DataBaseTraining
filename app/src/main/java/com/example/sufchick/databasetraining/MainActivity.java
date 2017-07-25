@@ -98,16 +98,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         return true;
     }
 
-    private boolean hasAnyMarketInstalled(Context context) {
 
-        Intent intent =new Intent();
-
-        intent.setData(Uri.parse("market://details?id=android.browser"));
-
-        List list = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-
-        return 0!= list.size();
-    }
 
     @Override
     public void onClick(View v) {

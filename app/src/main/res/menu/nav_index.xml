@@ -17,12 +17,29 @@
             android:id="@+id/chapter_one_4"
             android:title="@string/chapter_one_4" />
         <item
+            android:id="@+id/chapter_two_0"
+            android:title="@string/chapter_two_0" />
+        <item
             android:id="@+id/chapter_two_1"
             android:title="@string/chapter_two_1" />
         <item
+            android:id="@+id/chapter_three_0"
+            android:title="@string/chapter_three_0" />
+        <item
             android:id="@+id/chapter_three_1"
             android:title="@string/chapter_three_1" />
-
+        <item
+            android:id="@+id/chapter_three_2"
+            android:title="@string/chapter_three_2" />
+        <item
+            android:id="@+id/chapter_four_1"
+            android:title="@string/chapter_four_1" />
+        <item
+            android:id="@+id/chapter_four_2"
+            android:title="@string/chapter_four_2" />
+        <item
+            android:id="@+id/chapter_five_1"
+            android:title="@string/chapter_five_1" />
 
 
     </group>

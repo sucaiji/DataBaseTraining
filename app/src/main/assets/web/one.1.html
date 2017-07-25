@@ -1,3 +1,10 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<b><p>转自w3school</p></b>
 <div id="maincontent">
     <h1>SQL 数据类型</h1>
     <div>
@@ -5,7 +12,8 @@
         <p>在 MySQL 中，有三种主要的类型：文本、数字和日期/时间类型。</p>
         <h3>Text 类型：</h3>
         <table class="dataintable">
-            <tbody><tr>
+            <tbody>
+            <tr>
                 <th>数据类型</th>
                 <th>描述</th>
             </tr>
@@ -60,10 +68,12 @@
                 <td>SET</td>
                 <td>与 ENUM 类似，SET 最多只能包含 64 个列表项，不过 SET 可存储一个以上的值。</td>
             </tr>
-            </tbody></table>
+            </tbody>
+        </table>
         <h3>Number 类型：</h3>
         <table class="dataintable">
-            <tbody><tr>
+            <tbody>
+            <tr>
                 <th>数据类型</th>
                 <th>描述</th>
             </tr>
@@ -99,11 +109,13 @@
                 <td>DECIMAL(size,d)</td>
                 <td>作为字符串存储的 DOUBLE 类型，允许固定的小数点。</td>
             </tr>
-            </tbody></table>
+            </tbody>
+        </table>
         <p>* 这些整数类型拥有额外的选项 UNSIGNED。通常，整数可以是负数或正数。如果添加 UNSIGNED 属性，那么范围将从 0 开始，而不是某个负数。</p>
         <h3>Date 类型：</h3>
         <table class="dataintable">
-            <tbody><tr>
+            <tbody>
+            <tr>
                 <th>数据类型</th>
                 <th>描述</th>
             </tr>
@@ -142,14 +154,17 @@
                     <p>注释：4 位格式所允许的值：1901 到 2155。2 位格式所允许的值：70 到 69，表示从 1970 到 2069。</p>
                 </td>
             </tr>
-            </tbody></table>
-        <p>* 即便 DATETIME 和 TIMESTAMP 返回相同的格式，它们的工作方式很不同。在 INSERT 或 UPDATE 查询中，TIMESTAMP 自动把自身设置为当前的日期和时间。TIMESTAMP 也接受不同的格式，比如 YYYYMMDDHHMMSS、YYMMDDHHMMSS、YYYYMMDD 或 YYMMDD。</p>
+            </tbody>
+        </table>
+        <p>* 即便 DATETIME 和 TIMESTAMP 返回相同的格式，它们的工作方式很不同。在 INSERT 或 UPDATE 查询中，TIMESTAMP 自动把自身设置为当前的日期和时间。TIMESTAMP
+            也接受不同的格式，比如 YYYYMMDDHHMMSS、YYMMDDHHMMSS、YYYYMMDD 或 YYMMDD。</p>
     </div>
     <div>
         <h2>SQL Server 数据类型</h2>
         <h3>Character 字符串：</h3>
         <table class="dataintable">
-            <tbody><tr>
+            <tbody>
+            <tr>
                 <th>数据类型</th>
                 <th>描述</th>
                 <th>存储</th>
@@ -174,10 +189,12 @@
                 <td>可变长度的字符串。最多 2GB 字符数据。</td>
                 <td>&nbsp;</td>
             </tr>
-            </tbody></table>
+            </tbody>
+        </table>
         <h3>Unicode 字符串：</h3>
         <table class="dataintable">
-            <tbody><tr>
+            <tbody>
+            <tr>
                 <th>数据类型</th>
                 <th>描述</th>
                 <th>存储</th>
@@ -202,10 +219,12 @@
                 <td>可变长度的 Unicode 数据。最多 2GB 字符数据。</td>
                 <td>&nbsp;</td>
             </tr>
-            </tbody></table>
+            </tbody>
+        </table>
         <h3>Binary 类型：</h3>
         <table class="dataintable">
-            <tbody><tr>
+            <tbody>
+            <tr>
                 <th>数据类型</th>
                 <th>描述</th>
                 <th>存储</th>
@@ -217,17 +236,17 @@
             </tr>
             <tr>
                 <td>binary(n)</td>
-                <td>固定长度的二进制数据。最多  8,000 字节。</td>
+                <td>固定长度的二进制数据。最多 8,000 字节。</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>varbinary(n)</td>
-                <td>可变长度的二进制数据。最多  8,000 字节。</td>
+                <td>可变长度的二进制数据。最多 8,000 字节。</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>varbinary(max)</td>
-                <td>可变长度的二进制数据。最多  2GB 字节。</td>
+                <td>可变长度的二进制数据。最多 2GB 字节。</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
@@ -235,10 +254,12 @@
                 <td>可变长度的二进制数据。最多 2GB。</td>
                 <td>&nbsp;</td>
             </tr>
-            </tbody></table>
+            </tbody>
+        </table>
         <h3>Number 类型：</h3>
         <table class="dataintable">
-            <tbody><tr>
+            <tbody>
+            <tr>
                 <th>数据类型</th>
                 <th>描述</th>
                 <th>存储</th>
@@ -250,7 +271,7 @@
             </tr>
             <tr>
                 <td>smallint</td>
-                <td>允许从 -32,768  到 32,767 的所有数字。</td>
+                <td>允许从 -32,768 到 32,767 的所有数字。</td>
                 <td>2 字节</td>
             </tr>
             <tr>
@@ -304,10 +325,12 @@
                 <td>从 -3.40E + 38 到 3.40E + 38 的浮动精度数字数据。</td>
                 <td>4 字节</td>
             </tr>
-            </tbody></table>
+            </tbody>
+        </table>
         <h3>Date 类型：</h3>
         <table class="dataintable">
-            <tbody><tr>
+            <tbody>
+            <tr>
                 <th>数据类型</th>
                 <th>描述</th>
                 <th>存储</th>
@@ -347,10 +370,12 @@
                 <td>存储唯一的数字，每当创建或修改某行时，该数字会更新。timestamp 基于内部时钟，不对应真实时间。每个表只能有一个 timestamp 变量。</td>
                 <td>&nbsp;</td>
             </tr>
-            </tbody></table>
+            </tbody>
+        </table>
         <h3>其他数据类型：</h3>
         <table class="dataintable">
-            <tbody><tr>
+            <tbody>
+            <tr>
                 <th>数据类型</th>
                 <th>描述</th>
             </tr>
@@ -372,5 +397,11 @@
             </tr>
             <tr>
                 <td>table</td>
-                <td>存储结果集，供稍后处理。</td></tr></tbody></table></div>
+                <td>存储结果集，供稍后处理。</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+</body>
+</html>

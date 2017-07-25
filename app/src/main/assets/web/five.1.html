@@ -1,0 +1,271 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+</head>
+<body><b><p>转自http://www.cnblogs.com/knowledgesea/archive/2013/01/02/2841588.html</p></b><p><span><strong>存储过程简介</strong></span></p>
+<hr/>
+<p><strong>什么是存储过程</strong>：存储过程可以说是一个记录集吧，它是由一些T-SQL语句组成的代码块，这些T-SQL语句代码像一个方法一样实现一些功能（对单表或多表的增删改查），然后再给这个代码块取一个名字，在用到这个功能的时候调用他就行了。<br/><br/><strong>存储过程的好处</strong>：<br/><br/>1.由于数据库执行动作时，是先编译后执行的。然而存储过程是一个编译过的代码块，所以执行效率要比T-SQL语句高。<br/><br/>2.一个存储过程在程序在网络中交互时可以替代大堆的T-SQL语句，所以也能降低网络的通信量，提高通信速率。<br/><br/>3.通过存储过程能够使没有权限的用户在控制之下间接地存取数据库，从而确保数据的安全。<br/><br/><strong>小结：总之存储过程是好东西，在做项目时属于必备利器，下面介绍存储过程的基本语法。</strong>
+</p>
+<hr/>
+<p><span><strong>存储过程的语法和参数讲解</strong></span></p>
+<hr/>
+<p><strong>存储过程的一些基本语法：</strong></p>
+<div class="cnblogs_code">
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+    <pre><span>--</span><span>------------创建存储过程-----------------</span>
+<span>CREATE</span> <span>PROC</span> <span>[</span><span> EDURE </span><span>]</span> procedure_name <span>[</span><span> ; number </span><span>]</span>
+    <span>[</span><span> { @parameter data_type }
+        [ VARYING </span><span>]</span> <span>[</span><span> = default </span><span>]</span> <span>[</span><span> OUTPUT </span><span>]</span><span>
+    ] </span><span>[</span><span> ,...n </span><span>]</span>
+<span>[</span><span> WITH
+    { RECOMPILE | ENCRYPTION | RECOMPILE , ENCRYPTION } </span><span>]</span>
+<span>[</span><span> FOR REPLICATION </span><span>]</span>
+<span>AS</span> sql_statement <span>[</span><span> ...n </span><span>]</span>
+<span>--</span><span>------------调用存储过程-----------------</span>
+<span>EXECUTE</span> Procedure_name <span>''</span> <span>--</span><span>存储过程如果有参数，后面加参数格式为：@参数名=value，也可直接为参数值value</span>
+<span>--</span><span>------------删除存储过程-----------------</span>
+<span>drop</span> <span>procedure</span> procedure_name    <span>--</span><span>在存储过程中能调用另外一个存储过程，而不能删除另外一个存储过程</span></pre>
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+</div>
+<p>
+    <strong>创建存储过程的参数：</strong><br/>1.<span>procedure_name</span>&nbsp;：存储过程的名称，在前面加#为局部临时存储过程，加##为全局临时存储过程。<br/><br/>2.<span>; number</span>：是可选的整数，用来对同名的过程分组，以便用一条
+    DROP PROCEDURE 语句即可将同组的过程一起除去。例如，名为 orders 的应用程序使用的过程可以命名为 orderproc;1、orderproc;2 等。DROP PROCEDURE orderproc
+    语句将除去整个组。如果名称中包含定界标识符，则数字不应包含在标识符中，只应在 procedure_name 前后使用适当的定界符。&nbsp;<br/><br/>3.<span>@parameter</span>：
+    存储过程的参数。可以有一个或多个。用户必须在执行过程时提供每个所声明参数的值（除非定义了该参数的默认值）。存储过程最多可以有 2.100 个参数。&nbsp;<br/>使用 @
+    符号作为第一个字符来指定参数名称。参数名称必须符合标识符的规则。每个过程的参数仅用于该过程本身；相同的参数名称可以用在其它过程中。默认情况下，参数只能代替常量，而不能用于代替表名、列名或其它数据库对象的名称。有关更多信息，请参见
+    EXECUTE。&nbsp;<br/><br/>4.<span>data_type</span>：参数的数据类型。所有数据类型（包括 text、ntext 和 image）均可以用作存储过程的参数。不过，cursor
+    数据类型只能用于 OUTPUT 参数。如果指定的数据类型为 cursor，也必须同时指定 VARYING 和 OUTPUT 关键字。有关 SQL Server 提供的数据类型及其语法的更多信息，请参见数据类型。&nbsp;<br/>说明
+    对于可以是 cursor 数据类型的输出参数，没有最大数目的限制。&nbsp;<br/><br/>5.<span>VARYING：</span>&nbsp;指定作为输出参数支持的结果集（由存储过程动态构造，内容可以变化）。仅适用于游标参数。&nbsp;
+</p>
+<p>6.<span>default：</span>&nbsp;参数的默认值。如果定义了默认值，不必指定该参数的值即可执行过程。默认值必须是常量或 NULL。如果过程将对该参数使用 LIKE 关键字，那么默认值中可以包含通配符（%、_、[]
+    和 [^]）。</p>
+<p>7.<span>OUTPUT</span>&nbsp;：表明参数是返回参数。该选项的值可以返回给 EXEC[UTE]。使用 OUTPUT 参数可将信息返回给调用过程。Text、ntext 和 image 参数可用作 OUTPUT
+    参数。使用 OUTPUT 关键字的输出参数可以是游标占位符。&nbsp;</p>
+<p><span><span>8.</span>RECOMPILE:</span>&nbsp;表明 SQL Server 不会缓存该过程的计划，该过程将在运行时重新编译。在使用非典型值或临时值而不希望覆盖缓存在内存中的执行计划时，请使用
+    RECOMPILE 选项。</p>
+<p><span><span>9.</span>ENCRYPTION:</span>&nbsp;表示 SQL Server 加密 syscomments 表中包含 CREATE PROCEDURE 语句文本的条目。使用 ENCRYPTION
+    可防止将过程作为 SQL Server 复制的一部分发布。 说明 在升级过程中，SQL Server 利用存储在 syscomments 中的加密注释来重新创建加密过程。&nbsp;</p>
+<p><span><span>10</span>.FOR REPLICATION</span>&nbsp;:指定不能在订阅服务器上执行为复制创建的存储过程。.使用 FOR REPLICATION
+    选项创建的存储过程可用作存储过程筛选，且只能在复制过程中执行。本选项不能和 WITH RECOMPILE 选项一起使用。&nbsp;</p>
+<p><span><span>11</span>.AS</span>&nbsp;:指定过程要执行的操作。</p>
+<p><span><span>12</span>.sql_statement</span>&nbsp;:过程中要包含的任意数目和类型的 Transact-SQL 语句。但有一些限制。</p>
+<p><strong>小结：看过这些基本语法后，下面我就根据语法创建各式的存储过程。</strong></p>
+<hr/>
+<p>&nbsp;<span><strong>创建存储过程</strong></span></p>
+<hr/>
+<p></p>
+<table>
+    <tbody>
+    <tr>
+        <td colspan="5">UserAccount</td>
+    </tr>
+    <tr>
+        <td>UserID</td>
+        <td>UserName</td>
+        <td>PassWord</td>
+        <td>RegisterTime</td>
+        <td>RegisterIP</td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td>6 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>6 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>2012-12-31</td>
+        <td>6</td>
+    </tr>
+    <tr>
+        <td>18</td>
+        <td>5 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>5 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>2013-01-01</td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>19</td>
+        <td>1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>2013-01-01</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>20</td>
+        <td>2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>2013-01-01</td>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>21</td>
+        <td>3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>2013-01-01</td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>22</td>
+        <td>4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>2013-01-01</td>
+        <td>4</td>
+    </tr>
+    <tr>
+        <td>23</td>
+        <td>5 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>5 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>2013-01-01</td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>25</td>
+        <td>7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>2013-01-01</td>
+        <td>7</td>
+    </tr>
+    <tr>
+        <td>26</td>
+        <td>8 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>8 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>2013-01-01</td>
+        <td>8</td>
+    </tr>
+    <tr>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+        <td>NULL</td>
+    </tr>
+    </tbody>
+</table>
+<p>针对上面的表，我使用存储过程对它做一些操作：</p>
+<p><strong>1.<span>&nbsp;只返回单一记录集的存储过程</span></strong>&nbsp;</p>
+<div class="cnblogs_code">
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+    <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
+<span>create</span> <span>Procedure</span><span> GetUserAccount
+</span><span>as</span>
+<span>select</span> <span>*</span> <span>from</span><span> UserAccount
+</span><span>go</span>
+<span>--</span><span>-----------执行上面的存储过程----------------</span>
+<span>exec</span> GetUserAccount</pre>
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+</div>
+<p>&nbsp;结果：相当于运行 select * from&nbsp;<span>UserAccount&nbsp;这行代码，结果为整个表的数据。</span></p>
+<p><strong><span>2.<span>没有输入输出的存储过程</span></span></strong>&nbsp;</p>
+<div class="cnblogs_code">
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+    <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
+<span>create</span> <span>Procedure</span><span> inUserAccount
+</span><span>as</span>
+<span>insert</span> <span>into</span> UserAccount (UserName,<span>[</span><span>PassWord</span><span>]</span>,RegisterTime,RegisterIP) <span>values</span>(<span>9</span>,<span>9</span>,<span>'</span><span>2013-01-02</span><span>'</span>,<span>9</span><span>)
+</span><span>go</span>
+<span>--</span><span>-----------执行上面的存储过程----------------</span>
+<span>exec</span> inUserAccount</pre>
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+</div>
+<p>&nbsp;结果：相当于运行&nbsp;<span>insert</span>&nbsp;<span>into</span>&nbsp;UserAccount (UserName,<span>[</span><span>PassWord</span><span>]</span>,RegisterTime,RegisterIP)&nbsp;<span>values</span>(<span>9</span>,<span>9</span>,<span>'</span><span>2013-01-02</span><span>'</span>,<span>9</span><span>)</span><span>&nbsp;这行代码。</span>
+</p>
+<p><strong><span>3.<span>有返回值的存储过程</span></span></strong>&nbsp;</p>
+<div class="cnblogs_code">
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+    <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
+<span>create</span> <span>Procedure</span><span> inUserAccountRe
+</span><span>as</span>
+<span>insert</span> <span>into</span> UserAccount (UserName,<span>[</span><span>PassWord</span><span>]</span>,RegisterTime,RegisterIP) <span>values</span>(<span>10</span>,<span>10</span>,<span>'</span><span>2013-01-02</span><span>'</span>,<span>10</span><span>)
+</span><span>return</span> <span>@@rowcount</span>
+<span>go</span>
+<span>--</span><span>-----------执行上面的存储过程----------------</span>
+<span>exec</span> inUserAccountRe</pre>
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+</div>
+<p>&nbsp;解释：这里的@@rowcount为执行存储过程影响的行数，执行的结果是不仅插入了一条数据，还返回了一个值即 return value =1 &nbsp;，这个可以在程序中获取，稍后在c#调用存储过程中会有说到。</p>
+<p><strong>4.<span>有输入参数和输出参数的存储过程</span></strong>&nbsp;</p>
+<div class="cnblogs_code">
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+    <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
+<span>create</span> <span>Procedure</span><span> GetUserAccountRe
+</span><span>@UserName</span> <span>nchar</span>(<span>20</span><span>),
+</span><span>@UserID</span> <span>int</span><span> output
+</span><span>as</span>
+<span>if</span>(<span>@UserName</span><span>&gt;</span><span>5</span><span>)
+</span><span>select</span> <span>@UserID</span><span>=</span><span>COUNT</span>(<span>*</span>) <span>from</span> UserAccount <span>where</span> UserID<span>&gt;</span><span>25</span>
+<span>else</span>
+<span>set</span> <span>@UserID</span><span>=</span><span>1000</span>
+<span>go</span>
+<span>--</span><span>-----------执行上面的存储过程----------------</span>
+<span>exec</span> GetUserAccountRe <span>'</span><span>7</span><span>'</span>,<span>null</span></pre>
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+</div>
+<p>&nbsp;解释：<span>@UserName为输入参数，<span>@UserID为输出参数。&nbsp;<span>运行结果为@userID为COOUT（*）即 =1。</span></span></span></p>
+<p><strong><span><span><span>5<span>. 同时具有返回值、输入参数、输出参数的存储过程</span></span></span></span></strong>&nbsp;</p>
+<div class="cnblogs_code">
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+    <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
+<span>create</span> <span>Procedure</span><span> GetUserAccountRe1
+</span><span>@UserName</span> <span>nchar</span>(<span>20</span><span>),
+</span><span>@UserID</span> <span>int</span><span> output
+</span><span>as</span>
+<span>if</span>(<span>@UserName</span><span>&gt;</span><span>5</span><span>)
+</span><span>select</span> <span>@UserID</span><span>=</span><span>COUNT</span>(<span>*</span>) <span>from</span> UserAccount <span>where</span> UserID<span>&gt;</span><span>25</span>
+<span>else</span>
+<span>set</span> <span>@UserID</span><span>=</span><span>1000</span>
+<span>return</span> <span>@@rowcount</span>
+<span>go</span>
+<span>--</span><span>-----------执行上面的存储过程----------------</span>
+<span>exec</span> GetUserAccountRe1 <span>'</span><span>7</span><span>'</span>,<span>null</span></pre>
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+</div>
+<p>&nbsp;结果：<span><span><span>@userID为COOUT（*）即 =1，Retun Value=1。</span></span></span></p>
+<p><span><span><span><strong>6.<span>同时返回参数和记录集的存储过程</span></strong></span></span></span>&nbsp;</p>
+<div class="cnblogs_code">
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+    <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
+<span>create</span> <span>Procedure</span><span> GetUserAccountRe2
+</span><span>@UserName</span> <span>nchar</span>(<span>20</span><span>),
+</span><span>@UserID</span> <span>int</span><span> output
+</span><span>as</span>
+<span>if</span>(<span>@UserName</span><span>&gt;</span><span>5</span><span>)
+</span><span>select</span> <span>@UserID</span><span>=</span><span>COUNT</span>(<span>*</span>) <span>from</span> UserAccount <span>where</span> UserID<span>&gt;</span><span>25</span>
+<span>else</span>
+<span>set</span> <span>@UserID</span><span>=</span><span>1000</span>
+<span>select</span> <span>*</span> <span>from</span><span> UserAccount
+</span><span>return</span> <span>@@rowcount</span>
+<span>go</span>
+<span>--</span><span>-----------执行上面的存储过程----------------</span>
+<span>exec</span> GetUserAccountRe2 <span>'</span><span>7</span><span>'</span>,<span>null</span></pre>
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+</div>
+<p>
+    &nbsp;结果：返回执行&nbsp;<span>select</span>&nbsp;<span>*</span>&nbsp;<span>from</span><span>&nbsp;UserAccount 这句代码的结果集，同时<span><span><span>@userID为COOUT（*）即 =1，Retun Value=9。</span></span></span></span>&nbsp;
+</p>
+<p><strong><span><span><span>7.<span>返回多个记录集的存储过程</span></span></span></span></strong>&nbsp;</p>
+<div class="cnblogs_code">
+    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
+            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+    <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
+<span>create</span> <span>Procedure</span><span> GetUserAccountRe3
+</span><span>as</span>
+<span>select</span> <span>*</span> <span>from</span><span> UserAccount
+</span><span>select</span> <span>*</span> <span>from</span> UserAccount <span>where</span> UserID<span>&gt;</span><span>5</span>
+<span>go</span>
+<span>--</span><span>-----------执行上面的存储过程----------------</span>
+<span>exec</span> GetUserAccountRe3</pre>
+</div>
+</body>
+</html>

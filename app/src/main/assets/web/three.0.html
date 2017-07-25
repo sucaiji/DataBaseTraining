@@ -1,0 +1,131 @@
+<html>
+<head>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+</head>
+<body><b><p>转自 http://blog.chinaunix.net/uid-26430381-id-3223361.html</p></b>
+
+<p><span style="font-size:small;">问题的提出</span></p><p>
+    设有关系模式R（姓名，电话，参与的俱乐部，俱乐部的活动），候选码为（姓名，参与的俱乐部）。</p><p><br/></p>
+<table cellpadding="1" cellspacing="1" border="1">
+    <tbody>
+    <tr>
+        <td>姓名</td>
+        <td>电话</td>
+        <td>参与的俱乐部</td>
+        <td>俱乐部的活动</td>
+    </tr>
+    <tr>
+        <td>A</td>
+        <td>123</td>
+        <td>乒乓club</td>
+        <td>打乒乓球</td>
+    </tr>
+    <tr>
+        <td>A</td>
+        <td>123</td>
+        <td>登山club</td>
+        <td>爬山</td>
+    </tr>
+    <tr>
+        <td>B</td>
+        <td>456</td>
+        <td>乒乓club</td>
+        <td>打乒乓球</td>
+    </tr>
+    <tr>
+        <td>B</td>
+        <td>456</td>
+        <td>英语club</td>
+        <td>学习英语</td>
+    </tr>
+    <tr>
+        <td>C</td>
+        <td>789</td>
+        <td>登山club</td>
+        <td>爬山</td>
+    </tr>
+    <tr>
+        <td>C</td>
+        <td>789</td>
+        <td>英语club</td>
+        <td>学习英语</td>
+    </tr>
+    </tbody>
+</table><p>注意到上面的模式有什么问题？</p><p>1、<span>数据冗余</span>：一个人参与几个俱乐部，那么他的电话会重复几次；同样，一个俱乐部被几个人参加，它的活动就会重复几次。
+</p><p>2、<span>修改异常</span>：一旦一个人的手机号变化，那么对应于他参与的每个俱乐部的各行里的电话都需要修改，如果有遗漏，那么会造成数据不一致；俱乐部的活动也是如此。</p>
+<p>3、<span>插入异常</span>：如果一个新人到来，还未参加任何俱乐部，那么他的信息和电话就无法插入到这张表里，因为参与的俱乐部是主属性，不能为空。</p><p>
+    4、<span>删除异常</span>：如果某人暂时退出了所有的俱乐部，那么必须把所有的元组都删去，这样这个人的姓名和电话信息也不存在了。</p><p><br/></p><p>
+    问题的解决方式是把关系模式R分解成三个模式：</p>
+<table cellpadding="1" cellspacing="1" width="200" border="1">
+    <tbody>
+    <tr>
+        <td>姓名</td>
+        <td>电话</td>
+    </tr>
+    <tr>
+        <td>A</td>
+        <td>123</td>
+    </tr>
+    <tr>
+        <td>B</td>
+        <td>456</td>
+    </tr>
+    <tr>
+        <td>C</td>
+        <td>789</td>
+    </tr>
+    </tbody>
+</table>
+<table cellpadding="1" cellspacing="1" width="200" border="1">
+    <tbody>
+    <tr>
+        <td>俱乐部</td>
+        <td>活动</td>
+    </tr>
+    <tr>
+        <td>乒乓club</td>
+        <td>打乒乓球</td>
+    </tr>
+    <tr>
+        <td>英语club</td>
+        <td>学习英语</td>
+    </tr>
+    <tr>
+        <td>登山club</td>
+        <td>爬山</td>
+    </tr>
+    </tbody>
+</table>
+<table cellpadding="1" cellspacing="1" width="200" border="1">
+    <tbody>
+    <tr>
+        <td>姓名</td>
+        <td>参与的俱乐部</td>
+    </tr>
+    <tr>
+        <td>A</td>
+        <td>乒乓club</td>
+    </tr>
+    <tr>
+        <td>A</td>
+        <td>登山club</td>
+    </tr>
+    <tr>
+        <td>B</td>
+        <td>乒乓club</td>
+    </tr>
+    <tr>
+        <td>B</td>
+        <td>英语club</td>
+    </tr>
+    <tr>
+        <td valign="top">C</td>
+        <td valign="top">登山club</td>
+    </tr>
+    <tr>
+        <td valign="top">C</td>
+        <td valign="top">英语club</td>
+    </tr>
+    </tbody>
+</table>
+</body></html>

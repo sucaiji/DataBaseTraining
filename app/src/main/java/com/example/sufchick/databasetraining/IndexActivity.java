@@ -65,9 +65,6 @@ public class IndexActivity extends BaseActivity implements NavigationView.OnNavi
 
         changeContent("zero",R.string.chapter_zero);
 
-        //content=getString(R.string.chapter_content_zero);
-
-        //mTextView.setText(Html.fromHtml(content));
 
     }
 
@@ -90,11 +87,29 @@ public class IndexActivity extends BaseActivity implements NavigationView.OnNavi
             case R.id.chapter_one_4:
                 changeContent("one.4",R.string.chapter_one_4);
                 break;
+            case R.id.chapter_two_0:
+                changeContent("two.0",R.string.chapter_two_0);
+                break;
             case R.id.chapter_two_1:
                 changeContent("two.1",R.string.chapter_two_1);
                 break;
+            case R.id.chapter_three_0:
+                changeContent("three.0",R.string.chapter_three_0);
+                break;
             case R.id.chapter_three_1:
                 changeContent("three.1",R.string.chapter_three_1);
+                break;
+            case R.id.chapter_three_2:
+                changeContent("three.2",R.string.chapter_three_2);
+                break;
+            case R.id.chapter_four_1:
+                changeContent("four.1",R.string.chapter_four_1);
+                break;
+            case R.id.chapter_four_2:
+                changeContent("four.2",R.string.chapter_four_2);
+                break;
+            case R.id.chapter_five_1:
+                changeContent("five.1",R.string.chapter_five_1);
                 break;
 
             default:
@@ -125,45 +140,15 @@ public class IndexActivity extends BaseActivity implements NavigationView.OnNavi
         return true;
     }
     private void changeContent(String fileName,int titleId){
+        mScrollView.fullScroll(View.FOCUS_UP);
         title=getString(titleId);
         mToolbarTextView.setText(title);
         mWebView.loadUrl("file:///android_asset/web/"+fileName+".html");
         mWebView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-    }
-    private void changeContent(int contentId,int titleId){
-        content=getString(contentId);
-        title=getString(titleId);
-        mToolbarTextView.setText(title);
-       // mTextView.setText(Html.fromHtml(content));
         mScrollView.fullScroll(View.FOCUS_UP);
-
     }
 
-    /**
-     * TextView字体自适应
-     * @param tv
-     * @param maxWidth
-     * @param text
-     */
-    private void adjustTvTextSize(TextView tv, int maxWidth, String text) {
-        int avaiWidth = maxWidth - tv.getPaddingLeft() - tv.getPaddingRight() - 10;
 
-        if (avaiWidth <= 0) {
-            return;
-        }
-
-        TextPaint textPaintClone = new TextPaint(tv.getPaint());
-
-        float trySize = textPaintClone.getTextSize();
-
-        while (textPaintClone.measureText(text) > avaiWidth) {
-            trySize--;
-            textPaintClone.setTextSize(trySize);
-        }
-
-        Toast.makeText(this, "123123", Toast.LENGTH_SHORT).show();
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
-    }
 }

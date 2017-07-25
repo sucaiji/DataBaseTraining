@@ -1,0 +1,14 @@
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select{margin:10px;padding:0px;}
+body{font:16px"黑体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;line-height: 28px;}
+h1{font:36px"黑体","Arial Narrow",HELVETICA;}
+h2{font:28px"黑体","Arial Narrow",HELVETICA;}
+h3{font:22px"黑体","Arial Narrow",HELVETICA;}
+h4{font:20px"黑体","Arial Narrow",HELVETICA;}
+h5{font:18px"黑体","Arial Narrow",HELVETICA;}
+a{color:#2d374b;text-decoration:none}
+a:hover{color:#cd0200;text-decoration:underline}
+em{font-style:normal}
+li{list-style:none}
+img{border:0;vertical-align:middle}
+table{border-collapse:collapse;border-spacing:0}
+p{word-wrap:break-word}
