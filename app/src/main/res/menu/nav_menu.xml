@@ -2,16 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/start_study"
-            android:title="@string/start_study" />
-        <item
-            android:id="@+id/training"
-            android:title="@string/database_training" />
-        <item
             android:id="@+id/contactus"
-            android:title="@string/contactus" />
+            android:title="@string/contactus"
+            android:icon="@drawable/contact"
+            />
         <item
             android:id="@+id/marking"
-            android:title="@string/marking" />
+            android:title="@string/marking"
+            android:icon="@drawable/thumb_up"/>
     </group>
 </menu>

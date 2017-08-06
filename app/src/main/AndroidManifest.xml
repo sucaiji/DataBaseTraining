@@ -23,9 +23,6 @@
             android:label="@string/title_activity_index"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".TrainingActivity"
-            android:launchMode="singleTask" />
-        <activity
             android:name=".ContactusActivity"
             android:launchMode="singleTask" />
         <activity android:name=".ResultActivity"></activity>

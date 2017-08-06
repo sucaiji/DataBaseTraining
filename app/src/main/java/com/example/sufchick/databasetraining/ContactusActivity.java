@@ -42,14 +42,7 @@ public class ContactusActivity extends BaseActivity {
                 switch (item.getItemId()){
                     case R.id.contactus:
                         break;
-                    case R.id.start_study:
-                        Intent indexIntent=new Intent(ContactusActivity.this,IndexActivity.class);
-                        startActivity(indexIntent);
-                        break;
-                    case R.id.training:
-                        Intent trainingIntent=new Intent(ContactusActivity.this,TrainingActivity.class);
-                        startActivity(trainingIntent);
-                        break;
+
                     case R.id.marking:
                         if(hasAnyMarketInstalled(ContactusActivity.this)){
                             Uri uri = Uri.parse("market://details?id="+getPackageName());
@@ -70,11 +63,7 @@ public class ContactusActivity extends BaseActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_toolbar,menu);
-        return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -82,8 +71,6 @@ public class ContactusActivity extends BaseActivity {
             case android.R.id.home:
                 finish();
                 break;
-            case R.id.toolbar_menu:
-                mDrawerLayout.openDrawer(mNavigationView);
 
         }
         return true;

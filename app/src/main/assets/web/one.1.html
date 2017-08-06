@@ -2,6 +2,8 @@
 <html>
 <head>
     <link href="css/style.css" type="text/css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 </head>
 <body>
 <b><p>转自w3school</p></b>
@@ -167,27 +169,22 @@
             <tr>
                 <th>数据类型</th>
                 <th>描述</th>
-                <th>存储</th>
             </tr>
             <tr>
                 <td>char(n)</td>
                 <td>固定长度的字符串。最多 8,000 个字符。</td>
-                <td>n</td>
             </tr>
             <tr>
                 <td>varchar(n)</td>
                 <td>可变长度的字符串。最多 8,000 个字符。</td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>varchar(max)</td>
                 <td>可变长度的字符串。最多 1,073,741,824 个字符。</td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>text</td>
                 <td>可变长度的字符串。最多 2GB 字符数据。</td>
-                <td>&nbsp;</td>
             </tr>
             </tbody>
         </table>
@@ -197,27 +194,22 @@
             <tr>
                 <th>数据类型</th>
                 <th>描述</th>
-                <th>存储</th>
             </tr>
             <tr>
                 <td>nchar(n)</td>
                 <td>固定长度的 Unicode 数据。最多 4,000 个字符。</td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>nvarchar(n)</td>
                 <td>可变长度的 Unicode 数据。最多 4,000 个字符。</td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>nvarchar(max)</td>
                 <td>可变长度的 Unicode 数据。最多 536,870,912 个字符。</td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>ntext</td>
                 <td>可变长度的 Unicode 数据。最多 2GB 字符数据。</td>
-                <td>&nbsp;</td>
             </tr>
             </tbody>
         </table>
@@ -227,32 +219,26 @@
             <tr>
                 <th>数据类型</th>
                 <th>描述</th>
-                <th>存储</th>
             </tr>
             <tr>
                 <td>bit</td>
                 <td>允许 0、1 或 NULL</td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>binary(n)</td>
                 <td>固定长度的二进制数据。最多 8,000 字节。</td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>varbinary(n)</td>
                 <td>可变长度的二进制数据。最多 8,000 字节。</td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>varbinary(max)</td>
                 <td>可变长度的二进制数据。最多 2GB 字节。</td>
-                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>image</td>
                 <td>可变长度的二进制数据。最多 2GB。</td>
-                <td>&nbsp;</td>
             </tr>
             </tbody>
         </table>
@@ -262,27 +248,22 @@
             <tr>
                 <th>数据类型</th>
                 <th>描述</th>
-                <th>存储</th>
             </tr>
             <tr>
                 <td>tinyint</td>
                 <td>允许从 0 到 255 的所有数字。</td>
-                <td>1 字节</td>
             </tr>
             <tr>
                 <td>smallint</td>
                 <td>允许从 -32,768 到 32,767 的所有数字。</td>
-                <td>2 字节</td>
             </tr>
             <tr>
                 <td>int</td>
                 <td>允许从 -2,147,483,648 到 2,147,483,647 的所有数字。</td>
-                <td>4 字节</td>
             </tr>
             <tr>
                 <td>bigint</td>
                 <td>允许介于 -9,223,372,036,854,775,808 和 9,223,372,036,854,775,807 之间的所有数字。</td>
-                <td>8 字节</td>
             </tr>
             <tr>
                 <td>decimal(p,s)</td>
@@ -291,7 +272,6 @@
                     <p>p 参数指示可以存储的最大位数（小数点左侧和右侧）。p 必须是 1 到 38 之间的值。默认是 18。</p>
                     <p>s 参数指示小数点右侧存储的最大位数。s 必须是 0 到 p 之间的值。默认是 0。</p>
                 </td>
-                <td>5-17 字节</td>
             </tr>
             <tr>
                 <td>numeric(p,s)</td>
@@ -300,17 +280,14 @@
                     <p>p 参数指示可以存储的最大位数（小数点左侧和右侧）。p 必须是 1 到 38 之间的值。默认是 18。</p>
                     <p>s 参数指示小数点右侧存储的最大位数。s 必须是 0 到 p 之间的值。默认是 0。</p>
                 </td>
-                <td>5-17 字节</td>
             </tr>
             <tr>
                 <td>smallmoney</td>
                 <td>介于 -214,748.3648 和 214,748.3647 之间的货币数据。</td>
-                <td>4 字节</td>
             </tr>
             <tr>
                 <td>money</td>
                 <td>介于 -922,337,203,685,477.5808 和 922,337,203,685,477.5807 之间的货币数据。</td>
-                <td>8 字节</td>
             </tr>
             <tr>
                 <td>float(n)</td>
@@ -318,12 +295,10 @@
                     从 -1.79E + 308 到 1.79E + 308 的浮动精度数字数据。
                     参数 n 指示该字段保存 4 字节还是 8 字节。float(24) 保存 4 字节，而 float(53) 保存 8 字节。n 的默认值是 53。
                 </td>
-                <td>4 或 8 字节</td>
             </tr>
             <tr>
                 <td>real</td>
                 <td>从 -3.40E + 38 到 3.40E + 38 的浮动精度数字数据。</td>
-                <td>4 字节</td>
             </tr>
             </tbody>
         </table>
@@ -333,42 +308,34 @@
             <tr>
                 <th>数据类型</th>
                 <th>描述</th>
-                <th>存储</th>
             </tr>
             <tr>
                 <td>datetime</td>
                 <td>从 1753 年 1 月 1 日 到 9999 年 12 月 31 日，精度为 3.33 毫秒。</td>
-                <td>8 bytes</td>
             </tr>
             <tr>
                 <td>datetime2</td>
                 <td>从 1753 年 1 月 1 日 到 9999 年 12 月 31 日，精度为 100 纳秒。</td>
-                <td>6-8 bytes</td>
             </tr>
             <tr>
                 <td>smalldatetime</td>
                 <td>从 1900 年 1 月 1 日 到 2079 年 6 月 6 日，精度为 1 分钟。</td>
-                <td>4 bytes</td>
             </tr>
             <tr>
                 <td>date</td>
                 <td>仅存储日期。从 0001 年 1 月 1 日 到 9999 年 12 月 31 日。</td>
-                <td>3 bytes</td>
             </tr>
             <tr>
                 <td>time</td>
                 <td>仅存储时间。精度为 100 纳秒。</td>
-                <td>3-5 bytes</td>
             </tr>
             <tr>
                 <td>datetimeoffset</td>
                 <td>与 datetime2 相同，外加时区偏移。</td>
-                <td>8-10 bytes</td>
             </tr>
             <tr>
                 <td>timestamp</td>
                 <td>存储唯一的数字，每当创建或修改某行时，该数字会更新。timestamp 基于内部时钟，不对应真实时间。每个表只能有一个 timestamp 变量。</td>
-                <td>&nbsp;</td>
             </tr>
             </tbody>
         </table>

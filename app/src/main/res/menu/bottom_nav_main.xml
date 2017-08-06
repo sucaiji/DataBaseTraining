@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_menu"
+        android:title="主页"
+        android:icon="@drawable/home"
+        />
+    <item
+        android:id="@+id/bottom_study"
+        android:title="学习"
+        android:icon="@drawable/book"/>
+    <item
+        android:id="@+id/bottom_test"
+        android:title="练习"
+        android:icon="@drawable/test"/>
+
+</menu>

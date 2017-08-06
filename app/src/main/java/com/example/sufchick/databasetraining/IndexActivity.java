@@ -1,5 +1,7 @@
 package com.example.sufchick.databasetraining;
 
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,30 +16,23 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class IndexActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class IndexActivity extends BaseActivity {
 
     private Toolbar mToolbar;
 
     private ActionBar mActionBar;
 
-    private TextView mToolbarTextView;
-
-    private ScrollView mScrollView;
-
     private NavigationView mNavigationView;
 
-    private DrawerLayout mDrawerLayout;
-
-
-    private WebView mWebView;
-
-    private String content;
-
-    private String title;
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,28 +45,34 @@ public class IndexActivity extends BaseActivity implements NavigationView.OnNavi
         mActionBar=getSupportActionBar();
         mActionBar.setDisplayHomeAsUpEnabled(true);
 
-        mScrollView=(ScrollView)findViewById(R.id.index_scroll);
+        mListView=(ListView)findViewById(R.id.index_list_view);
 
-
-        mToolbarTextView=(TextView)findViewById(R.id.index_toolbar_textview);
-
-        mNavigationView=(NavigationView)findViewById(R.id.index_nav_view);
-
-        mDrawerLayout=(DrawerLayout)findViewById(R.id.index_drawer_layout);
-
-        mNavigationView.setNavigationItemSelectedListener(this);
-
-        mWebView=(WebView) findViewById(R.id.index_content_view);
-
-        changeContent("zero",R.string.chapter_zero);
+        Resources resources=getResources();
+        String[] data= resources.getStringArray(R.array.index);
+        ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,data);
+        mListView.setAdapter(arrayAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent();
+                intent.putExtra("chapter",position);
+                setResult(RESULT_OK,intent);
+                finish();
+            }
+        });
 
 
     }
 
+
+
+
+    /*
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mDrawerLayout.closeDrawer(mNavigationView);
-        switch(item.getItemId()){
+
+        Toast.makeText(this, "1+"+item.getItemId(), Toast.LENGTH_SHORT).show();
+        /*switch(item.getItemId()){
             case R.id.chapter_zero:
                 changeContent("zero",R.string.chapter_zero);
                 break;
@@ -117,14 +118,7 @@ public class IndexActivity extends BaseActivity implements NavigationView.OnNavi
         }
 
         return true;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.index_toolbar,menu);
-
-        return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -132,13 +126,10 @@ public class IndexActivity extends BaseActivity implements NavigationView.OnNavi
             case android.R.id.home:
                 finish();
                 break;
-            case R.id.toolbar_index:
-                mDrawerLayout.openDrawer(mNavigationView);
-                break;
-
         }
         return true;
     }
+    /*
     private void changeContent(String fileName,int titleId){
         mScrollView.fullScroll(View.FOCUS_UP);
         title=getString(titleId);
@@ -149,6 +140,6 @@ public class IndexActivity extends BaseActivity implements NavigationView.OnNavi
         webSettings.setJavaScriptEnabled(true);
         mScrollView.fullScroll(View.FOCUS_UP);
     }
-
+*/
 
 }

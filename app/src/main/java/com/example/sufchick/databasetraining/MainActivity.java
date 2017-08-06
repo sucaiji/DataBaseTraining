@@ -1,50 +1,125 @@
 package com.example.sufchick.databasetraining;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
+public class MainActivity extends BaseActivity{
+    private Toolbar mToolbar;
 
-//其他页面仿照主页 但是在学习页面添加上一章 下一章 练习 的底栏
-//
-public class MainActivity extends BaseActivity implements View.OnClickListener{
-    Toolbar mToolbar;
-    NavigationView mNavigationView;
-    DrawerLayout mDrawerLayout;
-    Button mStudyButton;
+    private BottomNavigationView mBottomNavigationView;
+    private NavigationView mNavigationView;
+    private DrawerLayout mDrawerLayout;
+    private TextView titleTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mToolbar=(Toolbar)findViewById(R.id.toolbar);
+        findView();
+
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
 
-        mStudyButton=(Button)findViewById(R.id.main_study_button);
-        mStudyButton.setOnClickListener(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        changeFragment(new MainFragment());
+
+        setListener();
+
+    }
 
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(mNavigationView);
+                break;
+            case R.id.toolbar_menu:
+                mDrawerLayout.openDrawer(mNavigationView);
+                break;
+        }
+        return true;
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 1:
+                int chapter=-1;
+                if(resultCode==RESULT_OK){
+                    chapter=data.getIntExtra("chapter",-1);
+                }
+                if(chapter!=-1){
+                    IndexFragment indexFragment=
+                            (IndexFragment) getSupportFragmentManager().findFragmentById(R.id.fragement);
+                    indexFragment.changeContent(chapter);
+                }
+                break;
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+
+
+    public void changeTitle(String title){
+        titleTextView.setText(title);
+    }
+
+    private void changeFragment(Fragment fragment){
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction transaction=fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragement,fragment);
+        transaction.commit();
+    }
+
+    private void findView(){
+        mToolbar=(Toolbar)findViewById(R.id.toolbar);
+        mBottomNavigationView=(BottomNavigationView)findViewById(R.id.bottom_nav);
+        titleTextView=(TextView) findViewById(R.id.toolbar_textview);
         mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
         mNavigationView=(NavigationView)findViewById(R.id.nav_view);
+    }
+
+    private void setListener(){
+        mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.bottom_menu:
+                        changeFragment(new MainFragment());
+                        break;
+                    case R.id.bottom_study:
+                        changeFragment(new IndexFragment());
+                        break;
+                    case R.id.bottom_test:
+                        changeFragment(new TrainingFragment());
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+
+
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -53,14 +128,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                     case R.id.contactus:
                         Intent contactusIntent=new Intent(MainActivity.this,ContactusActivity.class);
                         startActivity(contactusIntent);
-                        break;
-                    case R.id.start_study:
-                        Intent indexIntent=new Intent(MainActivity.this,IndexActivity.class);
-                        startActivity(indexIntent);
-                        break;
-                    case R.id.training:
-                        Intent trainingIntent=new Intent(MainActivity.this,TrainingActivity.class);
-                        startActivity(trainingIntent);
                         break;
                     case R.id.marking:
                         if(hasAnyMarketInstalled(MainActivity.this)){
@@ -80,33 +147,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 return true;
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_toolbar,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.toolbar_menu:
-                mDrawerLayout.openDrawer(mNavigationView);
-                break;
-        }
-        return true;
-    }
-
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.main_study_button:
-                Intent studyIntent=new Intent(this,IndexActivity.class);
-                startActivity(studyIntent);
-                break;
-        }
     }
 }
