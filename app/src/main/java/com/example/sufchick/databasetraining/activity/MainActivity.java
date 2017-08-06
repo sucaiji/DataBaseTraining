@@ -1,4 +1,4 @@
-package com.example.sufchick.databasetraining;
+package com.example.sufchick.databasetraining.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,9 +15,12 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
+import com.example.sufchick.databasetraining.fragment.IndexFragment;
+import com.example.sufchick.databasetraining.fragment.MainFragment;
+import com.example.sufchick.databasetraining.R;
+import com.example.sufchick.databasetraining.fragment.TrainingFragment;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity {
     private Toolbar mToolbar;
 
     private BottomNavigationView mBottomNavigationView;

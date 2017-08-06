@@ -1,4 +1,4 @@
-package com.example.sufchick.databasetraining;
+package com.example.sufchick.databasetraining.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.sufchick.databasetraining.R;
 
 
 public class ResultActivity extends AppCompatActivity{

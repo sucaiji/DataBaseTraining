@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.sufchick.databasetraining.IndexFragment">
+    tools:context="com.example.sufchick.databasetraining.fragment.IndexFragment">
     <WebView
         android:id="@+id/index_content_view"
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.example.sufchick.databasetraining;
+package com.example.sufchick.databasetraining.activity;
 
 import android.content.Context;
 import android.content.Intent;

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,13 +19,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".IndexActivity"
+            android:name=".activity.IndexActivity"
             android:label="@string/title_activity_index"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ContactusActivity"
+            android:name=".activity.ContactusActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".activity.ResultActivity"></activity>
     </application>
 
 </manifest>

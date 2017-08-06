@@ -1,4 +1,4 @@
-package com.example.sufchick.databasetraining;
+package com.example.sufchick.databasetraining.fragment;
 
 
 import android.content.Intent;
@@ -15,6 +15,9 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
+
+import com.example.sufchick.databasetraining.R;
+import com.example.sufchick.databasetraining.activity.IndexActivity;
 
 
 public class IndexFragment extends Fragment implements View.OnClickListener {
