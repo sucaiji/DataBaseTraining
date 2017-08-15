@@ -7,9 +7,8 @@
 <body><b><p>转自http://blog.csdn.net/xiangminjing/article/details/5922325</p></b>
 <p><strong>数据库并发控制</strong></p>
 <p></p>
-<div class="bct fc05 fc11 nbw-blog ztag js-fs2"><p><a
-        href="http://img.blog.163.com/photo/tipWUBM6SeEvRUXsIhMAmQ==/5403193652938985216.jpg" target="_blank"><img
-        src="http://img.blog.163.com/photo/tipWUBM6SeEvRUXsIhMAmQ==/5403193652938985216.jpg"/></a>&nbsp;</p>
+<div class="bct fc05 fc11 nbw-blog ztag js-fs2"><p><img
+        src="img/four2_1.jpg"/>&nbsp;</p>
     <p>&nbsp;</p>
     <p>1．&nbsp; 在数据库中为什么要并发控制？</p>
     <p>
@@ -31,29 +30,27 @@
     <p>4 ．如何用封锁机制保证数据的一致性？</p>
     <p>答： DBMS 在对数据进行读、写操作之前首先对该数据执行封锁操作，例如下图中事务 Tl 在对 A 进行修改之前先对 A 执行 xock ( A ) ，即对 A 加 x 锁。这样，当几请求对 A 加 x
         锁时就被拒绝，几只能等待 Tl 释放 A 上的锁后才能获得对 A 的 x 锁，这时它读到的 A 是 Tl 更新后的值，再按此新的 A 值进行运算。这样就不会丢失 Tl 的更新。</p>
-    <p><a href="http://img.blog.163.com/photo/mBk8VVL2OXef8SPr9Bcu1w==/2018457057992860102.jpg" target="_blank"><img
-            src="http://img.blog.163.com/photo/mBk8VVL2OXef8SPr9Bcu1w==/2018457057992860102.jpg"/></a></p>
+    <p><img
+            src="img/four2_2.jpg"/></p>
     <p>DBMS 按照一定的封锁协议，对并发操作进行控制，使得多个并发操作有序地执行，就可以避免丢失修改、不可重复读和读“脏’夕数据等数据不一致性。</p>
     <p>&nbsp;</p>
     <p>5 ．什么是活锁？什么是死锁？</p>
     <p>答：</p>
-    <p><a href="http://img.blog.163.com/photo/zDH5mZ2X9nU_kvgpY714rA==/5403193652938985215.jpg" target="_blank"><img
-            src="http://img.blog.163.com/photo/zDH5mZ2X9nU_kvgpY714rA==/5403193652938985215.jpg"/></a></p>
+    <p><img
+            src="img/four2_3.jpg"/></p>
     <p>如果事务 Tl 封锁了数据 R ，事务几又请求封锁 R ，于是几等待。几也请求封锁 R ，当 Tl 释放了 R 上的封锁之后系统首先批准了几的请求，几仍然等待。然后几又请求封锁 R ，当几释放了 R
         上的封锁之后系统又批准了几的请求 … … 几有可能永远等待，这就是活锁的情形。活锁的含义是该等待事务等待时间太长，似乎被锁住了，实际上可能被激活。如果事务 Tl 封锁了数据 Rl ，几封锁了数据凡，然后 Tl
         又请求封锁几，因几已封锁了几，于是 Tl 等待几释放几上的锁。接着几又申请封锁 Rl ，因 Tl 已封锁了 Rl ，几也只能等待 Tl 释放 Rl 上的锁。这样就出现了 Tl 在等待几，而几又在等待 T ｝的局面， T
         ｝和几两个事务永远不能结束，形成死锁。</p>
-    <p><a href="http://img.blog.163.com/photo/tipWUBM6SeEvRUXsIhMAmQ==/5403193652938985216.jpg" target="_blank"><img
-            src="http://img.blog.163.com/photo/tipWUBM6SeEvRUXsIhMAmQ==/5403193652938985216.jpg"/></a></p>
+    <p><img
+            src="img/four2_4.jpg"/></p>
     <p>&nbsp;</p>
     <p>6 ．试述活锁的产生原因和解决方法。</p>
     <p>
         答：活锁产生的原因：当一系列封锁不能按照其先后顺序执行时，就可能导致一些事务无限期等待某个封锁，从而导致活锁。避免活锁的简单方法是采用先来先服务的策略。当多个事务请求封锁同一数据对象时，封锁子系统按请求封锁的先后次序对事务排队，数据对象上的锁一旦释放就批准申请队列中第一个事务获得锁。</p>
     <p>&nbsp;</p>
     <p>11 ．请给出检测死锁发生的一种方法，当发生死锁后如何解除死锁？</p>
-    <p>答：数据库系统一般采用允许死锁发生， DBMS 检测到死锁后加以解除的方法。 DBMS 中诊断死锁的方法与<a href="http://lib.csdn.net/base/operatingsystem"
-                                                               class="replace_word" title="操作系统知识库"
-                                                               target="_blank">操作系统</a>类似，一般使用超时法或事务等待图法。超时法是：如果一个事务的等待时间超过了规定的时限，就认为发生了死锁。超时法实现简单，但有可能误判死锁，事务因其他原因长时间等待超过时限时，系统会误认为发生了死锁。若时限设置得太长，又不能及时发现死锁发生。
+    <p>答：数据库系统一般采用允许死锁发生， DBMS 检测到死锁后加以解除的方法。 DBMS 中诊断死锁的方法与操作系统类似，一般使用超时法或事务等待图法。超时法是：如果一个事务的等待时间超过了规定的时限，就认为发生了死锁。超时法实现简单，但有可能误判死锁，事务因其他原因长时间等待超过时限时，系统会误认为发生了死锁。若时限设置得太长，又不能及时发现死锁发生。
         DBMS 并发控制子系统检测到死锁后，就要设法解除。通常采用的方法是选择一个处理死锁代价最小的事务，将其撤消，释放此事务持有的所有锁，使其他事务得以继续运行下去。当然，对撤销的事务所执行的数据修改操作必须加以恢复。</p>
     <p>&nbsp;</p>
     <p>&nbsp;12 ．什么样的并发调度是正确的调度？</p>
@@ -69,26 +66,23 @@
         4 · 2 。</p>
     <p>( 2 ）请给出一个可串行化的调度，并给出执行结果</p>
     <p>答：</p>
-    <p><a href="http://img.blog.163.com/photo/slTvs_S9oy-zosSUJmbIzA==/2018457057992860109.jpg" target="_blank"><img
-            src="http://img.blog.163.com/photo/slTvs_S9oy-zosSUJmbIzA==/2018457057992860109.jpg"/></a></p>
+    <p><img
+            src="img/four2_5.jpg"/></p>
     <p>&nbsp;</p>
     <p>最后结果 A 为 16 ，是可串行化的调度。</p>
     <p>( 3 ）请给出一个非串行化的调度，并给出执行结果。</p>
     <p>答：</p>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-            href="http://img.blog.163.com/photo/4mLQE4CvuNznBpZD1oikIA==/2018457057992860112.jpg" target="_blank"><img
-            src="http://img.blog.163.com/photo/4mLQE4CvuNznBpZD1oikIA==/2018457057992860112.jpg"/></a></p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+            src="img/four2_6.jpg"/></p>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 最后结果 A 为 0 ，为非串行化的调度。</p>
     <p>( 4 ）若这 3 个事务都遵守两段锁协议，请给出一个不产生死锁的可串行化调度。</p>
     <p>答：</p>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-            href="http://img.blog.163.com/photo/j_pzUdXqTSiSG5ExpDAkEg==/2018457057992860115.jpg" target="_blank"><img
-            src="http://img.blog.163.com/photo/j_pzUdXqTSiSG5ExpDAkEg==/2018457057992860115.jpg"/></a></p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+            src="img/four2_7.jpg"/></p>
     <p>&nbsp;&nbsp;&nbsp;&nbsp; ( 5 ）若这 3 个事务都遵守两段锁协议，请给出一个产生死锁的调度。</p>
     <p>答：</p>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-            href="http://img.blog.163.com/photo/tPuc4Z923FNWXhmDVhHsXA==/1489002626800190087.jpg" target="_blank"><img
-            src="http://img.blog.163.com/photo/tPuc4Z923FNWXhmDVhHsXA==/1489002626800190087.jpg"/></a></p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+            src="img/four2_8.jpg"/></p>
     <p>&nbsp;</p>
     <p>11．试证明，若并发事务遵守两段锁协议，则对这些事务的并发调度是可串行化的。</p>
     <p>证明：首先以两个并发事务 Tl 和T2为例，存在多个并发事务的情形可以类推。根据可串行化定义可知，事务不可串行化只可能发生在下列两种情况：</p>
@@ -107,9 +101,8 @@
     <p>&nbsp;</p>
     <p>12 ．举例说明，对并发事务的一个调度是可串行化的，而这些并发事务不一定遵守两段锁协议。</p>
     <p>答：</p>
-    <p>&nbsp;<a href="http://img.blog.163.com/photo/_Sq7u9M8EMlOxXoFZLP52A==/1451003504944426858.jpg"
-                target="_blank"><img
-            src="http://img.blog.163.com/photo/_Sq7u9M8EMlOxXoFZLP52A==/1451003504944426858.jpg"/></a></p>
+    <p>&nbsp;<img
+            src="img/four2_9.jpg"/></p>
     <p>13 ．为什么要引进意向锁？意向锁的含义是什么？</p>
     <p>答：引进意向锁是为了提高封锁子系统的效率。该封锁子系统支持多种封锁粒度。原因是：在多粒度封锁方法中一个数据对象可能以两种方式加锁 ―
         显式封锁和隐式封锁。因此系统在对某一数据对象加锁时不仅要检查该数据对象上有无（显式和隐式）封锁与之冲突，还要检查其所有上级结点和所有下级结点，看申请的封锁是否与这些结点上的（显式和隐式）封锁冲突，显然，这样的检查方法效率很低。为此引进了意向锁。意向锁的含义是：对任一结点加锁时，必须先对它的上层结点加意向锁。例如事务
@@ -122,14 +115,12 @@
     <p>IX 锁：如果对一个数据对象加 ix 锁，表示它的后裔结点拟（意向功口 X 锁。例如，要对某个元组加 X 锁，则要首先对关系和数据库加 ix 锁。</p>
     <p>SIX 锁：如果对一个数据对象加 SIX 锁，表示对它加 S 锁，再加 IX 锁，即 SIX = S + IX 。</p>
     <p>相容矩阵：</p>
-    <p>&nbsp;<a href="http://img.blog.163.com/photo/hCviLgrsmpJwmq9BpQDaRg==/611363649416538133.jpg"
-                target="_blank"><img
-            src="http://img.blog.163.com/photo/hCviLgrsmpJwmq9BpQDaRg==/611363649416538133.jpg"/></a></p>
+    <p>&nbsp;<img
+            src="img/four2_10.jpg"/></p>
     <p>15 ．理解并解释下列术语的含义：封锁、活锁、死锁、排它锁、共享锁、并发事务的调度、可串行化的调度、两段锁协议。</p>
     <p>答：（略，已经在上面有关习题中解答）</p>
     <p>&nbsp;</p>
     <p>16 ．试述你了解的某一个实际的 DBMS 产品的并发控制机制。</p>
-    <p>答：（略，参见简单介绍了有关&nbsp;<a href="http://lib.csdn.net/base/oracle" class="replace_word" title="Oracle知识库"
-                              target="_blank">Oracle</a>&nbsp;的并发控制机制。</p></div>
+    <p>答：（略，参见简单介绍了有关&nbsp;Oracle&nbsp;的并发控制机制。</p></div>
 </body>
 </html>

@@ -31,35 +31,8 @@ public class ContactusActivity extends BaseActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        mDrawerLayout=(DrawerLayout)findViewById(R.id.aboutus_drawer_layout);
 
-        mNavigationView=(NavigationView)findViewById(R.id.aboutus_nav_view);
-        mNavigationView.setCheckedItem(R.id.contactus);
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                mDrawerLayout.closeDrawer(mNavigationView);
-                switch (item.getItemId()){
-                    case R.id.contactus:
-                        break;
 
-                    case R.id.marking:
-                        if(hasAnyMarketInstalled(ContactusActivity.this)){
-                            Uri uri = Uri.parse("market://details?id="+getPackageName());
-                            Intent markingIntent = new Intent(Intent.ACTION_VIEW,uri);
-                            markingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(markingIntent);
-                        }
-                        else{
-                            Toast.makeText(ContactusActivity.this, "没有找到应用市场", Toast.LENGTH_SHORT).show();
-                        }
-                        break;
-                    default:
-                        Toast.makeText(ContactusActivity.this, "您的操作有误，请重试", Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-        });
     }
 
 

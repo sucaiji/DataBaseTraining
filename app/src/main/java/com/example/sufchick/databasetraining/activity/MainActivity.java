@@ -1,6 +1,8 @@
 package com.example.sufchick.databasetraining.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -12,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +22,8 @@ import com.example.sufchick.databasetraining.fragment.IndexFragment;
 import com.example.sufchick.databasetraining.fragment.MainFragment;
 import com.example.sufchick.databasetraining.R;
 import com.example.sufchick.databasetraining.fragment.TrainingFragment;
+
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
     private Toolbar mToolbar;
@@ -101,18 +106,32 @@ public class MainActivity extends BaseActivity {
         mNavigationView=(NavigationView)findViewById(R.id.nav_view);
     }
 
+    private boolean hasAnyMarketInstalled(Context context) {
+
+        Intent intent =new Intent();
+
+        intent.setData(Uri.parse("market://details?id=android.browser"));
+
+        List list = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+
+        return 0!= list.size();
+    }
+
     private void setListener(){
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                String title=getString(R.string.app_name);
                 switch (item.getItemId()){
                     case R.id.bottom_menu:
+                        changeTitle(title);
                         changeFragment(new MainFragment());
                         break;
                     case R.id.bottom_study:
                         changeFragment(new IndexFragment());
                         break;
                     case R.id.bottom_test:
+                        changeTitle(title);
                         changeFragment(new TrainingFragment());
                         break;
                 }

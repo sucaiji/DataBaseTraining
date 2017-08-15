@@ -52,64 +52,8 @@ public class IndexActivity extends BaseActivity {
             }
         });
 
-
     }
 
-
-
-
-    /*
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        Toast.makeText(this, "1+"+item.getItemId(), Toast.LENGTH_SHORT).show();
-        /*switch(item.getItemId()){
-            case R.id.chapter_zero:
-                changeContent("zero",R.string.chapter_zero);
-                break;
-            case R.id.chapter_one_1:
-                changeContent("one.1",R.string.chapter_one_1);
-                break;
-            case R.id.chapter_one_2:
-                changeContent("one.2",R.string.chapter_one_2);
-                break;
-            case R.id.chapter_one_3:
-                changeContent("one.3",R.string.chapter_one_3);
-                break;
-            case R.id.chapter_one_4:
-                changeContent("one.4",R.string.chapter_one_4);
-                break;
-            case R.id.chapter_two_0:
-                changeContent("two.0",R.string.chapter_two_0);
-                break;
-            case R.id.chapter_two_1:
-                changeContent("two.1",R.string.chapter_two_1);
-                break;
-            case R.id.chapter_three_0:
-                changeContent("three.0",R.string.chapter_three_0);
-                break;
-            case R.id.chapter_three_1:
-                changeContent("three.1",R.string.chapter_three_1);
-                break;
-            case R.id.chapter_three_2:
-                changeContent("three.2",R.string.chapter_three_2);
-                break;
-            case R.id.chapter_four_1:
-                changeContent("four.1",R.string.chapter_four_1);
-                break;
-            case R.id.chapter_four_2:
-                changeContent("four.2",R.string.chapter_four_2);
-                break;
-            case R.id.chapter_five_1:
-                changeContent("five.1",R.string.chapter_five_1);
-                break;
-
-            default:
-                Toast.makeText(this, "操作异常，请重试", Toast.LENGTH_SHORT).show();
-        }
-
-        return true;
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -120,17 +64,5 @@ public class IndexActivity extends BaseActivity {
         }
         return true;
     }
-    /*
-    private void changeContent(String fileName,int titleId){
-        mScrollView.fullScroll(View.FOCUS_UP);
-        title=getString(titleId);
-        mToolbarTextView.setText(title);
-        mWebView.loadUrl("file:///android_asset/web/"+fileName+".html");
-        mWebView.setWebViewClient(new WebViewClient());
-        WebSettings webSettings = mWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        mScrollView.fullScroll(View.FOCUS_UP);
-    }
-*/
 
 }

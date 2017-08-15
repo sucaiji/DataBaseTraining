@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body><b><p>转自http://www.cnblogs.com/oversea201405/p/3752065.html</p></b><p><br/></p>
+
+
+<p><h2>1、视图的创建和管理</h2>&nbsp;&nbsp;&nbsp;<h4>视图的创建</h4><br/>&nbsp;&nbsp;&nbsp;1:通过sql语句<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格式:<pre>create view 视图名 as select 语句</pre><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;试一试:分别创建关于一个表或多个表的视图[因为视图可以来自于多表]<br/>&nbsp;&nbsp;&nbsp;2:通过企业管理器&nbsp;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;说明:(1)在完成视图的创立之后,就可以像使用基本表一样来使用视图<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2)在创建视图时,并非所有的select子查询都可用<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如:compute和compute by,order by[除非与top一起连用]<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(3)但在查询时,依然都可以用在创建时禁用的select子查询<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:在视图创建时,必须为没有标题列指定标题
+</p>
+<p>&nbsp;&nbsp;&nbsp;<h4>视图的删除</h4><br/>&nbsp;&nbsp;&nbsp;1:通过sql语句:<pre>drop view 视图名</pre><br/>&nbsp;&nbsp;&nbsp;2:通过企业管理器<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;说明:与删除表不同的是,删除视图后只是删除了视图了定义,并没有删除表中的数据
+</p>
+<p>&nbsp;&nbsp;&nbsp;<h4>修改视图的定义</h4><br/>&nbsp;&nbsp;&nbsp;1:通过企业管理器<br/>&nbsp;&nbsp;&nbsp;2:通过sql语句:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格式:<pre>alter view 视图名 as 新的select语句</pre>
+</p>
+<p><h2>2、如何通过视图修改基本表的数据.</h2><br/>&nbsp;&nbsp;&nbsp;<h3>1:在视图上使用insert语句</h3><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过视图插入数据与直接在表中插入数据一样,但视图毕竟不是基本表.因此在进行数据插入时还是有一定的限制<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:如果视图上没有包括基本表中属性为not null[不能为空]的列,那么插入操作会因为那些列是null值而失败.<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:如果某些列因为某些规则或约束的限制而不能直接接受从视图插入的列时,插入会失败<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:如果在视图中包含了使用统计函数的结果,或是包含计算列,则插入操作会失败<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:不能在使用了distinct语句的视图中插入值,也不能修改值<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5:不能在使用了group by语句的视图中插入值,也不能修改值<br/>
+</p>
+<p>&nbsp;&nbsp;&nbsp;<h3>2:使用update更新视图中的数据</h3><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:更新视图与更新表格一样,但是在视图中使用了多个基本表连接的情况下,每次更新操作只能更新来自基本表的一个数据列<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;例如:创建以下视图:<pre>create view del as
+        select 职工号,姓名,部门名称,负责人 from work1,部门
+            where work1.部门编号=部门.部门编号</pre>如果再执行下面的语句时:<pre>update del set 职工号=\'001\',部门名称=\'wenda\' where 职工号=\'01\'[出现错误]</pre><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只能够改成:<pre>update del set 职工号=\'001\' where 职工号=\'01\'
+    update del set 部门名称=\'wenda\' where 职工号=\'01\'</pre><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:不能在使用了distinct语句的视图中更新值<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:不能在使用了group by语句的视图中更新值
+</p>
+<p>&nbsp;&nbsp;&nbsp;<h3>3:使用delete删除视图中数据.</h3><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过视图删除数据最终体现为从基本表中删除数据<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格式:<pre>delete 视图名 [where 条件]</pre><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;说明:当视图由两个以上的基表构成时,不允许删除视图的数据<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;例如:建一个视图kk<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<pre>create view kk as
+    select 职工号,姓名,性别,部门名称 from work1,部门 where work1.部门编号=部门.部门编号 [试着去删除]</pre>
+</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用with check option的视图<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果不了解视图定义内容,则常常会发生向视图中输入不符合视图定义的数据的情况.<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如:<pre>create view xm as
+    select * from work where 性别=\'男\'</pre>完全可以插入insert xm values(\'001\',\'女\',23,\'2400\'....)<br/>尽管从意义上来说是不合理的,但是上述语句是正确的.为了防止这种情况的发生,可以使用with check option子句来对插入的或更改的数据进行限制.<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如:<pre>create view xm as
+    select * from work where 性别=\'男\' with check option</pre>
+</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用schemabinding的视图[使用绑定到构架]<br/>我们知道视图是依赖于表,如果在一个表中创建一个视图,今后如果这个表被删除了,则这个视图将不可再用了.为了防止用户删除一个有视图在引用的表,可以在创建视图的时候加上schemabinding关键字.<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如:<pre>create view 基本工资 with SCHEMABINDING
+    as select 姓名,性别,基本工资 from dbo.work</pre><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;说明:1:不能使用“*”来创建此类型的视图<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:创建此类型的视图时,一定要加上dbo.表名.<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:如果在某个表中定义了此类视图,则用户将不能对表的结构进行修改,否则会删除这些绑定<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:如果用户对表的结构进行列改名,则会删除绑定而且视图不可用.<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5:如果用户对表的结构进行列的类型或者大小修改,则会删除绑定但视图可用,此时用户可以删除视图所引用的表.<br/>&nbsp;<br/>&nbsp;&nbsp;<strong>&nbsp;&nbsp;&nbsp;使用with encryption对视图进行加密<br/>为了保护创建视图定义的原代码,可以对视图进行加密.<br/></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如:<pre>create view kk with encryption
+    as select * from work where 职称=\'经理\'</pre><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用sp_helptext来查看一下.或用企业管理器查看一下.<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;说明:如果应用此项用户将无法设计视图
+</p>
+<p><h2>3、使用视图加强数据的安全</h2>&nbsp;&nbsp;一般通过使用视图共有三种途径加强数据的安全性&nbsp;&nbsp;&nbsp;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A:对不同用户授予不同的使用权.<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B:通过使用select子句限制用户对某些底层基表的列的访问<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C:通过使用where子句限制用户对某些底层基表的行的访问<br/>&nbsp;&nbsp;&nbsp;对不同用户授予不同的权限
+</p>
+</body>
+</html>

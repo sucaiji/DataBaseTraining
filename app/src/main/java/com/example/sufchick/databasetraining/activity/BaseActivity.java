@@ -20,20 +20,6 @@ public class BaseActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
-    }
-    protected boolean hasAnyMarketInstalled(Context context) {
-
-        Intent intent =new Intent();
-
-        intent.setData(Uri.parse("market://details?id=android.browser"));
-
-        List list = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-
-        return 0!= list.size();
     }
 
 

@@ -18,11 +18,12 @@ import android.widget.Toast;
 
 import com.example.sufchick.databasetraining.R;
 import com.example.sufchick.databasetraining.activity.IndexActivity;
+import com.example.sufchick.databasetraining.activity.MainActivity;
 
 
 public class IndexFragment extends Fragment implements View.OnClickListener {
 
-    private FragmentActivity activity;
+    private MainActivity activity;
 
     private View view;
 
@@ -60,7 +61,7 @@ public class IndexFragment extends Fragment implements View.OnClickListener {
         initPageInfo();
 
 
-        activity = getActivity();
+        activity =(MainActivity) getActivity();
 
         lastPage.setOnClickListener(this);
 
@@ -87,7 +88,6 @@ public class IndexFragment extends Fragment implements View.OnClickListener {
                 changeContent(pageNumber);
                 break;
             case R.id.index_button:
-                Toast.makeText(getActivity(), "index", Toast.LENGTH_SHORT).show();
                 if (activity == null) {
                     Toast.makeText(activity, "发生未知错误balabala", Toast.LENGTH_SHORT).show();
                 }
@@ -126,8 +126,13 @@ public class IndexFragment extends Fragment implements View.OnClickListener {
 
     public void changeContent(int pageNumber) {
         //mScrollView.fullScroll(View.FOCUS_UP);
-        String fileName=indexToHtmlArray[pageNumber];
+
         title=indexArray[pageNumber];
+        activity.changeTitle(title);
+
+        this.pageNumber=pageNumber;
+
+        String fileName=indexToHtmlArray[pageNumber];
         mWebView.loadUrl("file:///android_asset/web/" + fileName + ".html");
         mWebView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = mWebView.getSettings();
@@ -147,4 +152,6 @@ public class IndexFragment extends Fragment implements View.OnClickListener {
         nextPage = (LinearLayout) view.findViewById(R.id.next_page_button);
 
     }
+
+
 }

@@ -2,15 +2,9 @@ package com.example.sufchick.databasetraining.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.sufchick.databasetraining.R;
 
@@ -18,9 +12,8 @@ import com.example.sufchick.databasetraining.R;
 public class ResultActivity extends AppCompatActivity{
 
     private Toolbar mToolbar;
-    private DrawerLayout mDrawerLayout;
-    private RecyclerView mTitle;
-    private ListView mResult;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +27,6 @@ public class ResultActivity extends AppCompatActivity{
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.result_drawer_layout);
-
-        mTitle=(RecyclerView) findViewById(R.id.result_title_recycle);
 
     }
 
@@ -49,6 +39,8 @@ public class ResultActivity extends AppCompatActivity{
         }
         return true;
     }
+
+
 
 
 }

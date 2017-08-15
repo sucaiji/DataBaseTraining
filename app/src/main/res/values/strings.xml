@@ -5,7 +5,7 @@
     \t\t你可以在闲暇的时候掏出手机来，进行数据库的学习。并且，通过本应用，可以操作安卓系统内置的sqlite数据库，虽然这是一个轻量的数据库，但是使用它来练习增删改查等一些基本操作也是足够了。\n
         \t\t大多数转载的内容都写上了出处，有少部分文章经过多次转载，已经没法查明出处，如果你是这些文章的作者，请联系我，我会删除这些内容。\n
             \t\t我知道一个app中不断弹出广告是一件多么讨人厌的事，所以我尽量把广告放在了不那么妨碍阅读的地方，如果你觉得这个应用非常不错，又无法忍受广告的话，请耐心学习下去，我在教程的某个角落隐藏了无广告版应用的下载地址。
-        \n
+        \n\t\t可能这个应用有很多反人类的设计，并且我没有发现它们，如果你发现了这种反人类设计，请告诉我，我会尽快改正的。
     </string>
     <string name="index">目录</string>
     <string name="start_screen">开始界面</string>
@@ -22,11 +22,11 @@
         <item>1.2 创建库、表、索引</item>
         <item>1.3 数据库完整性约束</item>
         <item>1.4 增删改查</item>
-        <item>2.0 视图</item>
         <item>2.1 视图</item>
-        <item>3.0 关系数据库规范化理论</item>
-        <item>3.1 函数依赖</item>
-        <item>3.2 关系规范化</item>
+        <item>2.2 视图</item>
+        <item>3.1 关系数据库规范化理论</item>
+        <item>3.2 函数依赖</item>
+        <item>3.3 关系规范化</item>
         <item>4.1 事务</item>
         <item>4.2 并发控制</item>
         <item>5.1 存储过程</item>
@@ -37,11 +37,11 @@
         <item>one.2</item>
         <item>one.3</item>
         <item>one.4</item>
-        <item>two.0</item>
         <item>two.1</item>
-        <item>three.0</item>
+        <item>two.2</item>
         <item>three.1</item>
         <item>three.2</item>
+        <item>three.3</item>
         <item>four.1</item>
         <item>four.2</item>
         <item>five.1</item>
