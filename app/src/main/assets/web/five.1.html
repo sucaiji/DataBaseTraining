@@ -14,8 +14,6 @@
 <hr/>
 <p><strong>存储过程的一些基本语法：</strong></p>
 <div class="cnblogs_code">
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
     <pre><span>--</span><span>------------创建存储过程-----------------</span>
 <span>CREATE</span> <span>PROC</span> <span>[</span><span> EDURE </span><span>]</span> procedure_name <span>[</span><span> ; number </span><span>]</span>
     <span>[</span><span> { @parameter data_type }
@@ -29,8 +27,7 @@
 <span>EXECUTE</span> Procedure_name <span>''</span> <span>--</span><span>存储过程如果有参数，后面加参数格式为：@参数名=value，也可直接为参数值value</span>
 <span>--</span><span>------------删除存储过程-----------------</span>
 <span>drop</span> <span>procedure</span> procedure_name    <span>--</span><span>在存储过程中能调用另外一个存储过程，而不能删除另外一个存储过程</span></pre>
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
 </div>
 <p>
     <strong>创建存储过程的参数：</strong><br/>1.<span>procedure_name</span>&nbsp;：存储过程的名称，在前面加#为局部临时存储过程，加##为全局临时存储过程。<br/><br/>2.<span>; number</span>：是可选的整数，用来对同名的过程分组，以便用一条
@@ -155,14 +152,12 @@
 </span><span>go</span>
 <span>--</span><span>-----------执行上面的存储过程----------------</span>
 <span>exec</span> GetUserAccount</pre>
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
 </div>
 <p>&nbsp;结果：相当于运行 select * from&nbsp;<span>UserAccount&nbsp;这行代码，结果为整个表的数据。</span></p>
 <p><strong><span>2.<span>没有输入输出的存储过程</span></span></strong>&nbsp;</p>
 <div class="cnblogs_code">
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
     <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
 <span>create</span> <span>Procedure</span><span> inUserAccount
 </span><span>as</span>
@@ -170,15 +165,13 @@
 </span><span>go</span>
 <span>--</span><span>-----------执行上面的存储过程----------------</span>
 <span>exec</span> inUserAccount</pre>
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
 </div>
 <p>&nbsp;结果：相当于运行&nbsp;<span>insert</span>&nbsp;<span>into</span>&nbsp;UserAccount (UserName,<span>[</span><span>PassWord</span><span>]</span>,RegisterTime,RegisterIP)&nbsp;<span>values</span>(<span>9</span>,<span>9</span>,<span>'</span><span>2013-01-02</span><span>'</span>,<span>9</span><span>)</span><span>&nbsp;这行代码。</span>
 </p>
 <p><strong><span>3.<span>有返回值的存储过程</span></span></strong>&nbsp;</p>
 <div class="cnblogs_code">
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
     <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
 <span>create</span> <span>Procedure</span><span> inUserAccountRe
 </span><span>as</span>
@@ -187,14 +180,12 @@
 <span>go</span>
 <span>--</span><span>-----------执行上面的存储过程----------------</span>
 <span>exec</span> inUserAccountRe</pre>
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
 </div>
 <p>&nbsp;解释：这里的@@rowcount为执行存储过程影响的行数，执行的结果是不仅插入了一条数据，还返回了一个值即 return value =1 &nbsp;，这个可以在程序中获取，稍后在c#调用存储过程中会有说到。</p>
 <p><strong>4.<span>有输入参数和输出参数的存储过程</span></strong>&nbsp;</p>
 <div class="cnblogs_code">
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
     <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
 <span>create</span> <span>Procedure</span><span> GetUserAccountRe
 </span><span>@UserName</span> <span>nchar</span>(<span>20</span><span>),
@@ -207,14 +198,12 @@
 <span>go</span>
 <span>--</span><span>-----------执行上面的存储过程----------------</span>
 <span>exec</span> GetUserAccountRe <span>'</span><span>7</span><span>'</span>,<span>null</span></pre>
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
 </div>
 <p>&nbsp;解释：<span>@UserName为输入参数，<span>@UserID为输出参数。&nbsp;<span>运行结果为@userID为COOUT（*）即 =1。</span></span></span></p>
 <p><strong><span><span><span>5<span>. 同时具有返回值、输入参数、输出参数的存储过程</span></span></span></span></strong>&nbsp;</p>
 <div class="cnblogs_code">
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
     <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
 <span>create</span> <span>Procedure</span><span> GetUserAccountRe1
 </span><span>@UserName</span> <span>nchar</span>(<span>20</span><span>),
@@ -228,14 +217,12 @@
 <span>go</span>
 <span>--</span><span>-----------执行上面的存储过程----------------</span>
 <span>exec</span> GetUserAccountRe1 <span>'</span><span>7</span><span>'</span>,<span>null</span></pre>
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
 </div>
 <p>&nbsp;结果：<span><span><span>@userID为COOUT（*）即 =1，Retun Value=1。</span></span></span></p>
 <p><span><span><span><strong>6.<span>同时返回参数和记录集的存储过程</span></strong></span></span></span>&nbsp;</p>
 <div class="cnblogs_code">
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
     <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
 <span>create</span> <span>Procedure</span><span> GetUserAccountRe2
 </span><span>@UserName</span> <span>nchar</span>(<span>20</span><span>),
@@ -250,16 +237,14 @@
 <span>go</span>
 <span>--</span><span>-----------执行上面的存储过程----------------</span>
 <span>exec</span> GetUserAccountRe2 <span>'</span><span>7</span><span>'</span>,<span>null</span></pre>
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
 </div>
 <p>
     &nbsp;结果：返回执行&nbsp;<span>select</span>&nbsp;<span>*</span>&nbsp;<span>from</span><span>&nbsp;UserAccount 这句代码的结果集，同时<span><span><span>@userID为COOUT（*）即 =1，Retun Value=9。</span></span></span></span>&nbsp;
 </p>
 <p><strong><span><span><span>7.<span>返回多个记录集的存储过程</span></span></span></span></strong>&nbsp;</p>
 <div class="cnblogs_code">
-    <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img
-            src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"/></a></span></div>
+
     <pre><span>--</span><span>-----------创建名为GetUserAccount的存储过程----------------</span>
 <span>create</span> <span>Procedure</span><span> GetUserAccountRe3
 </span><span>as</span>
