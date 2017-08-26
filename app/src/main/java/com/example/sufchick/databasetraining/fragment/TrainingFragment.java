@@ -71,7 +71,6 @@ public class TrainingFragment extends Fragment {
             public void onClick(View v) {
                 String str = sqlEditText.getText().toString();
                 sqlEditText.setText("");
-                //Toast.makeText(activity, "发送成功", Toast.LENGTH_SHORT).show();
                 try {
                     addContentln("<b>you:</b>" + str +"<br/>");
                     boolean select = str.matches("^select .*");
@@ -105,7 +104,6 @@ public class TrainingFragment extends Fragment {
 
 
                 } catch (Exception e) {
-                    Toast.makeText(activity, "catch", Toast.LENGTH_SHORT).show();
                     addContentln("<b>error:</b>" + e.getMessage()+"<br/>");
 
                 }finally {

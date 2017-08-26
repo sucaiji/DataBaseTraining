@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -13,29 +15,57 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sufchick.databasetraining.AppInfo;
 import com.example.sufchick.databasetraining.fragment.IndexFragment;
 import com.example.sufchick.databasetraining.fragment.MainFragment;
 import com.example.sufchick.databasetraining.R;
 import com.example.sufchick.databasetraining.fragment.TrainingFragment;
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
 
 import java.util.List;
 
 public class MainActivity extends BaseActivity {
+
+    public static final int STRAT_BANNER=10001;
+
     private Toolbar mToolbar;
 
     private BottomNavigationView mBottomNavigationView;
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
     private TextView titleTextView;
+
+    private ViewGroup bannerContainer;
+    private BannerView bv;
+
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case STRAT_BANNER:
+                    MainActivity.this.bv.loadAD();
+                    break;
+
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        banner();
 
         findView();
 
@@ -169,5 +199,61 @@ public class MainActivity extends BaseActivity {
                 return true;
             }
         });
+    }
+
+    private void banner(){
+        bannerContainer = (ViewGroup) this.findViewById(R.id.bannerContainer);
+        this.initBanner();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    Message message=new Message();
+                    message.what=STRAT_BANNER;
+                    handler.sendMessage(message);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+    }
+
+    private void initBanner() {
+        this.bv = new BannerView(this, ADSize.BANNER, AppInfo.APPID, AppInfo.BOTTOM_BANNER);
+        // 注意：如果开发者的banner不是始终展示在屏幕中的话，请关闭自动刷新，否则将导致曝光率过低。
+        // 并且应该自行处理：当banner广告区域出现在屏幕后，再手动loadAD。
+        bv.setRefresh(30);
+        bv.setADListener(new AbstractBannerADListener() {
+
+            @Override
+            public void onNoAD(int arg0) {
+                Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
+            }
+
+            @Override
+            public void onADReceiv() {
+                Log.i("AD_DEMO", "ONBannerReceive");
+            }
+        });
+        bannerContainer.addView(bv);
+    }
+
+
+
+    private void doRefreshBanner() {
+        if (bv == null) {
+            initBanner();
+        }
+        bv.loadAD();
+    }
+
+    private void doCloseBanner() {
+        bannerContainer.removeAllViews();
+        if (bv != null) {
+            bv.destroy();
+            bv = null;
+        }
     }
 }
